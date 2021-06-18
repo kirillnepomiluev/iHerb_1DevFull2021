@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iherb_helper/screens/profile/profile.dart';
 
 void main() {
   runApp(MyApp());
@@ -103,6 +104,23 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.show_chart),
+            label: "Прогресс",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: "Поиск",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: "Профиль",
+          ),
+        ],
+        onTap: _onTabTap,
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
@@ -110,4 +128,20 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+  void _onTabTap(int index) {
+    switch (index) {
+      case tabProfile:
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ProfileScreen(),
+          ),
+        );
+        break;
+    }
+  }
 }
+
+const tabProgress = 0;
+const tabSearch = 1;
+const tabProfile = 2;
