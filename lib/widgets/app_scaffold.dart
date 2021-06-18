@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iherb_helper/screens/BasketPage.dart';
 import 'package:iherb_helper/screens/profile/profile.dart';
 import 'package:iherb_helper/screens/search/search.dart';
 
@@ -32,6 +33,10 @@ class AppScaffold extends StatelessWidget {
             icon: Icon(Icons.account_circle),
             label: "Профиль",
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_basket),
+            label: "Корзина",
+          )
         ],
         onTap: (index) => _onTabTap(context, index),
       ),
@@ -54,6 +59,13 @@ class AppScaffold extends StatelessWidget {
           ),
         );
         break;
+        case tabBasket:
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => BasketPage(),
+          ),
+        );
+        break;
     }
   }
 }
@@ -61,3 +73,4 @@ class AppScaffold extends StatelessWidget {
 const tabProgress = 0;
 const tabSearch = 1;
 const tabProfile = 2;
+const tabBasket = 3;
