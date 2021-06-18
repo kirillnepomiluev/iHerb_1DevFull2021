@@ -51,6 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return AppScaffold(
       child: profileContentColumn(context),
       title: "Profile",
+      index: 2,
     );
   }
 

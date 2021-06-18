@@ -79,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return AppScaffold(
       title: "Цель: Снижение веса",
       child: Container(),
+      index: 0,
     );
   }
 }

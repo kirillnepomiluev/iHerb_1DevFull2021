@@ -1,3 +1,4 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:iherb_helper/screens/BasketPage.dart';
 import 'package:iherb_helper/screens/profile/profile.dart';
@@ -6,12 +7,13 @@ import 'package:iherb_helper/screens/search/search.dart';
 class AppScaffold extends StatelessWidget {
   final String title;
   final Widget child;
-
+  final index;
   AppScaffold({
     @required this.title,
     @required this.child,
+    @required this.index
   });
-
+  List <IconData> iconList = [Icons.bar_chart,  Icons.search, Icons.account_box, Icons.shopping_basket];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,26 +21,23 @@ class AppScaffold extends StatelessWidget {
         title: Text(title),
       ),
       body: child,
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.show_chart),
-            label: "Прогресс",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: "Поиск",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: "Профиль",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_basket),
-            label: "Корзина",
-          )
-        ],
-        onTap: (index) => _onTabTap(context, index),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {  },
+        //params
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+        icons: iconList,
+        activeIndex: index,
+        gapLocation: GapLocation.center,
+        elevation: 12,
+        notchSmoothness: NotchSmoothness.sharpEdge,
+        leftCornerRadius: 15,
+        rightCornerRadius: 15,
+        height: 70,
+        onTap: (index) =>  _onTabTap(context, index)
+      ,
+        //other params
       ),
     );
   }

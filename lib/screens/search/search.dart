@@ -3,6 +3,7 @@ import 'package:iherb_helper/models/condition.dart';
 import 'package:iherb_helper/widgets/abstract.dart';
 import 'package:iherb_helper/widgets/app_scaffold.dart';
 import 'package:iherb_helper/widgets/condition_autocomplete.dart';
+import 'package:iherb_helper/widgets/textFeild.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class _SearchScreenState extends State<SearchScreen> {
       title: "Поиск",
       child: ListView(
         children: [
+          TextFieldNeo(label: "поиск",  hint: "поиск", onChanged: (value) {},  ),
           ConditionAutocompleteWidget(
             label: "Condition",
             controller: _conditionController,
@@ -25,6 +27,9 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ],
       ),
+      index: 2,
     );
   }
 }
+
+

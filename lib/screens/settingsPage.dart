@@ -31,7 +31,7 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
 
-    return AppScaffold(child: bodySetting(context),title: 'Настройки',);
+    return AppScaffold(child: bodySetting(context),title: 'Настройки', index: 2,);
 
   }
   Widget bodySetting (BuildContext context){
