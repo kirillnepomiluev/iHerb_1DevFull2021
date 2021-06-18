@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iherb_helper/widgets/app_scaffold.dart';
 
+import '../settingsPage.dart';
+
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,18 @@ class ProfileScreen extends StatelessWidget {
               GestureDetector(
                   onTap: () {
                     // FirebaseAuth.instance.signOut();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SettingPage()),);
+                  },
+                  child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Icon(Icons.settings,
+                          size: 40.0,
+                          color: Theme.of(context)
+                              .tabBarTheme
+                              .unselectedLabelColor))),
+              GestureDetector(
+                  onTap: () {
+                    // FirebaseAuth.instance.signOut();
                     Navigator.pushNamed(context, "/signin");
                   },
                   child: Padding(
@@ -50,14 +64,14 @@ class ProfileScreen extends StatelessWidget {
               margin: EdgeInsets.all(20),
               width: 120.0,
               height: 120.0,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  alignment: Alignment.topCenter,
-                  // image: FirebaseImage(profilePhotoUrl, shouldCache: false),
-                ),
-              ),
+              // decoration: BoxDecoration(
+              //   shape: BoxShape.circle,
+              //   image: DecorationImage(
+              //     fit: BoxFit.cover,
+              //     alignment: Alignment.topCenter,
+              //     // image: FirebaseImage(profilePhotoUrl, shouldCache: false),
+              //   ),
+              // ),
             ),
           ),
           Padding(
