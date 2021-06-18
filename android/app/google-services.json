@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "942204396558",
+    "project_id": "hackiherb",
+    "storage_bucket": "hackiherb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942204396558:android:009ef480ec8923592a485f",
+        "android_client_info": {
+          "package_name": "com.example.iherb_helper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "942204396558-e613ukfudjcvlgsbr65m4fme2akon9na.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_AsyL2pyvH96BeCkCACJ3LdWBgktslq4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "942204396558-e613ukfudjcvlgsbr65m4fme2akon9na.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
