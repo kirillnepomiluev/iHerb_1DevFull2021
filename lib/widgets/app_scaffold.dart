@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iherb_helper/screens/profile/profile.dart';
+import 'package:iherb_helper/screens/search/search.dart';
 
 class AppScaffold extends StatelessWidget {
   final String title;
@@ -39,6 +40,13 @@ class AppScaffold extends StatelessWidget {
 
   void _onTabTap(BuildContext context, int index) {
     switch (index) {
+      case tabSearch:
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => SearchScreen(),
+          ),
+        );
+        break;
       case tabProfile:
         Navigator.of(context).push(
           MaterialPageRoute(
