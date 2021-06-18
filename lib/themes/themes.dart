@@ -98,7 +98,7 @@ class MyThemes {
           fontStyle: FontStyle.normal,
           fontWeight: FontWeight.w500,
           fontFamily: "Roboto",
-          color: Color(0xFFFFFFFF),
+          color: Colors.black,
           letterSpacing: -0.41
       ),
 

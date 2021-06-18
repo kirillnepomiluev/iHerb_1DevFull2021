@@ -1,9 +1,51 @@
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
 import 'package:iherb_helper/widgets/app_scaffold.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../settingsPage.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  Isolate isolate;
+
+  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  String photoURL;
+
+  DocumentSnapshot dsuser;
+
+  Map map;
+
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  void getCurrentUser() async {
+    // FirebaseUser _user = await _firebaseAuth.currentUser();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc("NjJrmXCopAGttbkKame2")
+        .get()
+        .then((value) {
+          setState(() {
+            dsuser = value;
+            map = dsuser.data();
+          });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
@@ -64,20 +106,22 @@ class ProfileScreen extends StatelessWidget {
               margin: EdgeInsets.all(20),
               width: 120.0,
               height: 120.0,
-              // decoration: BoxDecoration(
-              //   shape: BoxShape.circle,
-              //   image: DecorationImage(
-              //     fit: BoxFit.cover,
-              //     alignment: Alignment.topCenter,
-              //     // image: FirebaseImage(profilePhotoUrl, shouldCache: false),
-              //   ),
-              // ),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  alignment: Alignment.topCenter,
+                  image: AssetImage(
+                      'assets/uuu.jpg'),
+                  // image: FirebaseImage(profilePhotoUrl, shouldCache: false),
+                ),
+              ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 8, 0, 18),
             child: new Text(
-              profileName,
+              map['name'] != null ? map['name'] : "не указано",
               style: Theme.of(context).textTheme.headline5,
             ),
           ),
