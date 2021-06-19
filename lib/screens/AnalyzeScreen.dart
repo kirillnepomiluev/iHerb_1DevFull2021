@@ -12,6 +12,9 @@ import 'package:iherb_helper/utils/scannerUtils.dart' as scannerUtils;
 import 'package:iherb_helper/widgets/app_scaffold.dart';
 import 'package:iherb_helper/themes/themes.dart' as themes;
 import 'package:flutter/foundation.dart';
+import 'package:iherb_helper/widgets/map_table.dart';
+
+final recognized = <String, double>{};
 
 class AnalyzeScreen extends StatefulWidget {
 
@@ -66,13 +69,7 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
                     height: 60,
                     width: 150,
                     child: NeumorphicButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => CameraPreviewScanner(_camera),
-                          ),
-                        );
-                      },
+                      onPressed: () => _scan(context),
                       child: Text(
                         "Загрузка анализов",
                         textAlign: TextAlign.center,
@@ -84,19 +81,38 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
                     ),
                   )
               ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: _indicators.length,
-                  itemBuilder: (context, i) {
-                    return Text(_indicators.elementAt(i).name);
-                  },
-                ),
-              )
+              MapTable(
+                map: recognized,
+              ),
+              // Expanded(
+              //   child: ListView.builder(
+              //     itemCount: _indicators.length,
+              //     itemBuilder: (context, i) {
+              //       return Text(_indicators.elementAt(i).name);
+              //     },
+              //   ),
+              // )
             ] ,
           )
       ),
       index: 2,
     );
+  }
+
+  void _scan(BuildContext context) async {
+    recognized.clear();
+
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => CameraPreviewScanner(
+          recognized: recognized,
+          camera: _camera,
+        ),
+      ),
+    );
+
+    setState(() {
+    });
   }
 
   void getIndicators() async {
