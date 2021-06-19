@@ -32,7 +32,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
       child: profileContentColumn(context),
       title: "Пищевые добавки",
       index: 2,
-      actionsBasket: true,
+      // actionsBasket: true,
     );
   }
 
