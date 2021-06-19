@@ -1,19 +1,28 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iherb_helper/screens/BasketPage.dart';
 import 'package:iherb_helper/screens/profile/profile.dart';
 import 'package:iherb_helper/screens/search/search.dart';
+import 'package:iherb_helper/themes/colors.dart';
+
+import '../icons.dart';
 
 class AppScaffold extends StatelessWidget {
   final String title;
   final Widget child;
   final index;
-  AppScaffold({
-    @required this.title,
-    @required this.child,
-    @required this.index
-  });
-  List <IconData> iconList = [Icons.bar_chart,  Icons.search, Icons.account_box, Icons.shopping_basket];
+
+  AppScaffold(
+      {@required this.title, @required this.child, @required this.index});
+
+  List<IconData> iconList = [
+    MyFlutterApp.ic_profile,
+    MyFlutterApp.ic_food,
+    MyFlutterApp.ic_analyz,
+    MyFlutterApp.ic_home
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,22 +30,32 @@ class AppScaffold extends StatelessWidget {
         title: Text(title),
       ),
       body: child,
+      backgroundColor: Color(0xFFF5FCFD),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {  },
+        backgroundColor: green_Light,
+        child: Container(
+          margin: EdgeInsets.all(15),
+          child: Image.asset(
+            'assets/logo.png',
+            fit: BoxFit.fill,
+          ),
+        ),
+        onPressed: () {},
         //params
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
+
+        backgroundColor: Colors.white,
         icons: iconList,
         activeIndex: index,
         gapLocation: GapLocation.center,
-        elevation: 12,
+        elevation: 16,
         notchSmoothness: NotchSmoothness.sharpEdge,
         leftCornerRadius: 15,
         rightCornerRadius: 15,
-        height: 70,
-        onTap: (index) =>  _onTabTap(context, index)
-      ,
+        height: MediaQuery.of(context).size.height * 0.13,
+        onTap: (index) => _onTabTap(context, index),
         //other params
       ),
     );
@@ -58,7 +77,7 @@ class AppScaffold extends StatelessWidget {
           ),
         );
         break;
-        case tabBasket:
+      case tabBasket:
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => BasketPage(),
