@@ -166,7 +166,7 @@ print('FOUND ' + term + ' ' + stringValue);
         fit: StackFit.expand,
         children: <Widget>[
           CameraPreview(_camera),
-          //_buildResults(),
+          _buildResults(),
           Positioned(
             //child: MapTable(map: _recognized),
             child: _getRecognizedContainer(),
