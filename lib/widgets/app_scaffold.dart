@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:iherb_helper/screens/BasketPage.dart';
 import 'package:iherb_helper/screens/SuggestionPicker.dart';
 import 'package:iherb_helper/screens/catalog/CatalogPage.dart';
+import 'package:iherb_helper/screens/lifestyle/LifeStylePage.dart';
 import 'package:iherb_helper/screens/profile/profile.dart';
 import 'package:iherb_helper/screens/search/search.dart';
 import 'package:iherb_helper/themes/colors.dart';
@@ -38,14 +39,14 @@ class AppScaffold extends StatelessWidget {
             fontSize: 18,
             color: Colors.black)),
         actions: [
-          actionsBasket ? IconButton(icon: Icon(Icons.shopping_basket_outlined,size: 28,color: Colors.black,), onPressed: (){}) : Container(),
+          actionsBasket ? IconButton(icon: Icon(Icons.shopping_basket_outlined,size: 28,color: Colors.black,), onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => BasketPage(),));}) : Container(),
         ],
         backgroundColor: Color(0xFFF5FCFD),
       ),
       body: child,
       backgroundColor: Color(0xFFF5FCFD),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: green_Light,
+        backgroundColor: Color(0xFF478414),
         child: Container(
           margin: EdgeInsets.all(15),
           child: Image.asset(
@@ -95,14 +96,14 @@ class AppScaffold extends StatelessWidget {
       case tabProfile:
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => ProfileScreen(),
+            builder: (context) => LifeStyleScreen(),
           ),
         );
         break;
       case tabBasket:
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => BasketPage(),
+            builder: (context) => ProfileScreen(),
           ),
         );
         break;
