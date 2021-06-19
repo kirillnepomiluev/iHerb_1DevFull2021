@@ -1,6 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:iherb_helper/screens/BasketPage.dart';
+import 'package:iherb_helper/screens/SuggestionPicker.dart';
 import 'package:iherb_helper/screens/profile/profile.dart';
 import 'package:iherb_helper/screens/search/search.dart';
 
@@ -44,6 +45,13 @@ class AppScaffold extends StatelessWidget {
 
   void _onTabTap(BuildContext context, int index) {
     switch (index) {
+      case tabProgress:
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => SuggestionPicker(),
+          ),
+        );
+        break;
       case tabSearch:
         Navigator.of(context).push(
           MaterialPageRoute(
