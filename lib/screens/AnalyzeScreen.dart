@@ -13,6 +13,7 @@ import 'package:iherb_helper/utils/scannerUtils.dart' as scannerUtils;
 import 'package:iherb_helper/widgets/app_scaffold.dart';
 import 'package:iherb_helper/themes/themes.dart' as themes;
 import 'package:flutter/foundation.dart';
+import 'package:iherb_helper/themes/colors.dart';
 
 class AnalyzeScreen extends StatefulWidget {
 
@@ -96,21 +97,7 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
                   ), */
                   itemCount: _supplements.length,
                   itemBuilder: (context, i) {
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
-                          child: Image.network(
-                              _supplements.elementAt(i).image,
-                              width: 90.0,
-                              height: 90.0,
-                              fit: BoxFit.fill),
-                        ),
-                        Expanded(child: Text(_supplements.elementAt(i).name)),
-                      ],
-                    );
+                    return sublementWidget(context, supplement: _supplements.elementAt(i));
                   },
                 ),
               ) : Container()
@@ -185,5 +172,84 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
     "Z9ehq3FV1uSxYW4FZsiA" : 70,
     "yeSr6kVtkGgtk2frrrsN" : 1,
   };
+
+  Widget sublementWidget(BuildContext context,
+      {Color color = orange_Light,
+        String section = 'Витамины, Микроэлементы',
+        Supplement supplement}) {
+    return GestureDetector(
+      onTap: (){
+        //showDialog(context: context, builder: (BuildContext context) => (showPosition(context)));
+      },
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(32),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 4,
+                  blurRadius: 5,
+                  offset: Offset(4, 5), // changes position of shadow
+                ),
+              ],
+            ),
+            margin: EdgeInsets.fromLTRB(24, 24, 24, 0),
+            padding: EdgeInsets.fromLTRB(32, 17, 22, 15),
+            child: Row(
+              children: [
+                Container(
+                  height: 100,
+                  width: 90,
+                  margin: EdgeInsets.only(left: 0, right: 15),
+                  child: Image.network(
+                      supplement.image,
+                      width: 90.0,
+                      height: 50.0,
+                      fit: BoxFit.fill
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(section,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FontStyle.normal,
+                              fontFamily: 'Roboto',
+                              fontSize: 12,
+                              color: Color(0xFF478414))),
+                      Container(
+                        margin: EdgeInsets.only(top: 7, bottom: 7),
+                        child: Text(supplement.name,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontStyle: FontStyle.normal,
+                                fontFamily: 'Roboto',
+                                fontSize: 12,
+                                color: Color(0xFF2E2E2E))),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          Positioned(
+            top: 48,
+            right: 22,
+            child: Container(
+              height: 42,
+              width: 24,
+              child: Image.asset('assets/ReitCircle.png'),
+            ),
+          )
+        ],
+      ),
+    );
+  }
 
 }
