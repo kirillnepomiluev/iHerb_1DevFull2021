@@ -1,6 +1,7 @@
 import 'dart:isolate';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:iherb_helper/widgets/app_scaffold.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -25,6 +26,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Map map;
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  bool isCheckedMen = false;
+  bool isCheckedWoman = false;
 
   void getCurrentUser() async {
     // FirebaseUser _user = await _firebaseAuth.currentUser();
@@ -66,19 +70,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
     String profileCountry = " Город не указан",
     String profileTarget = " Цель не указана",
   }) {
-    return Column(
-        // mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          bannerFace(context),
-          TextFieldNeo(hint: 'Город',icon: Icons.location_on_outlined,onChanged: (value){},label: '',),
-          TextFieldNeo(hint: 'Фамилия',icon: Icons.location_on_outlined,onChanged: (value){},label: '',),
-          TextFieldNeo(hint: 'Имя',icon: Icons.location_on_outlined,onChanged: (value){},label: '',),
-          TextFieldNeo(hint: 'Отчество',icon: Icons.location_on_outlined,onChanged: (value){},label: '',),
-          TextFieldNeo(hint: 'Дата рождения',icon: Icons.location_on_outlined,onChanged: (value){},label: '',),
-          TextFieldNeo(hint: 'Город',icon: Icons.location_on_outlined,onChanged: (value){},label: '',),
-        ]);
+    return SingleChildScrollView(
+      child: Column(
+          // mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            bannerFace(context),
+            TextFieldNeo(
+              hint: 'Город',
+              icon: Icons.location_on_outlined,
+              onChanged: (value) {},
+              label: '',
+            ),
+            TextFieldNeo(
+              hint: 'Фамилия',
+              icon: Icons.location_on_outlined,
+              onChanged: (value) {},
+              label: '',
+            ),
+            TextFieldNeo(
+              hint: 'Имя',
+              icon: Icons.location_on_outlined,
+              onChanged: (value) {},
+              label: '',
+            ),
+            TextFieldNeo(
+              hint: 'Отчество',
+              icon: Icons.location_on_outlined,
+              onChanged: (value) {},
+              label: '',
+            ),
+            genderCheck(context),
+            TextFieldNeo(
+              hint: 'Дата рождения',
+              icon: Icons.location_on_outlined,
+              onChanged: (value) {},
+              label: '',
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 15),
+              child: TextFieldNeo(
+                hint: 'Город',
+                icon: Icons.location_on_outlined,
+                onChanged: (value) {},
+                label: '',
+              ),
+            ),
+          ]),
+    );
   }
 
   Widget bannerFace(BuildContext context) {
@@ -103,9 +143,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             width: MediaQuery.of(context).size.width * 0.26,
             decoration: BoxDecoration(
                 color: Color(0xFFF5FCFD),
-                boxShadow: [
-                  BoxShadow()
-                ],
+                boxShadow: [BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  blurRadius: 2,
+                  spreadRadius: 3,
+                  offset: Offset(-2,-2),
+                )],
                 borderRadius: BorderRadius.only(
                     topRight: Radius.circular(100),
                     topLeft: Radius.circular(100))),
@@ -123,14 +166,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Row(
             children: [
               Container(
-                margin: EdgeInsets.only(top: 40),
+                  margin: EdgeInsets.only(top: 40),
                   height: 52,
                   width: 52,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                borderRadius: BorderRadius.circular(100),
-              ),
-                  child: Icon(Icons.add,size: 50,color: Color(0xFF94D065),)),
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: Icon(
+                    Icons.add,
+                    size: 50,
+                    color: Color(0xFF94D065),
+                  )),
               Container(
                 alignment: Alignment.bottomLeft,
                 padding: EdgeInsets.fromLTRB(10, 26, 10, 10),
@@ -170,6 +217,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         )
       ],
+    );
+  }
+
+  Widget genderCheck(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: 24, right: 24, top: 15),
+      child: Row(
+        children: [
+          Text('Пол'),
+          Expanded(child: Container()),
+          NeumorphicButton(
+            margin: EdgeInsets.only(right: 8),
+            child: Center(child: Text('Мужской')),
+            style: NeumorphicStyle(
+                color: isCheckedMen ? Color(0xFF478414) : Colors.white),
+            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+            onPressed: () {
+              setState(() {
+                isCheckedMen = true;
+                isCheckedWoman = false;
+              });
+            },
+          ),
+          NeumorphicButton(
+            child: Center(child: Text('Женский')),
+            style: NeumorphicStyle(
+                color: isCheckedWoman ? Color(0xFF478414) : Colors.white),
+            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+            onPressed: () {
+              setState(() {
+                isCheckedMen = false;
+                isCheckedWoman = true;
+              });
+            },
+          )
+        ],
+      ),
     );
   }
 
