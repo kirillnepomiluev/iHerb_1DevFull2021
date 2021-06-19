@@ -177,7 +177,7 @@ class _CameraPreviewScannerState extends State<CameraPreviewScanner> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ML Vision Example'),
+        title: const Text('Считываем результат...'),
         actions: <Widget>[
           PopupMenuButton<Detector>(
             onSelected: (Detector result) {

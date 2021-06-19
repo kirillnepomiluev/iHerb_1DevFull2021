@@ -69,9 +69,6 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
                     width: 150,
                     child: NeumorphicButton(
                       onPressed: () {
-                        setState(() {
-                          _recognitionProcess = true;
-                        });
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => CameraPreviewScanner(_camera, _analyze),
