@@ -104,3 +104,6 @@ const greytextbodydark = const Color(0xFFF5F5F5); // текст боди осн�
 const redSelected = const Color(0xFFFF0000); // те
 
 const green_Light = const Color(0xFF94D065); //
+const orange_Light = const Color(0xFFFFF5DE); //
+const salat_Light = const Color(0xFFE3FCE9); //
+const rozov_Light = const Color(0xFFFFEEEA); //

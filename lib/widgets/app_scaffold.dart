@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iherb_helper/screens/BasketPage.dart';
 import 'package:iherb_helper/screens/SuggestionPicker.dart';
+import 'package:iherb_helper/screens/catalog/CatalogPage.dart';
 import 'package:iherb_helper/screens/profile/profile.dart';
 import 'package:iherb_helper/screens/search/search.dart';
 import 'package:iherb_helper/themes/colors.dart';
@@ -52,12 +53,13 @@ class AppScaffold extends StatelessWidget {
             fit: BoxFit.fill,
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => CatalogScreen(),));
+        },
         //params
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
-
         backgroundColor: Colors.white,
         icons: iconList,
         inactiveColor: Color(0xFF999999),
