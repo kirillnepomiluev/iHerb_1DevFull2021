@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:iherb_helper/widgets/textFeild.dart';
 
+import '../dialog.dart';
 import '../settingsPage.dart';
 
 class CatalogScreen extends StatefulWidget {
@@ -17,6 +18,9 @@ class CatalogScreen extends StatefulWidget {
 }
 
 class _CatalogScreenState extends State<CatalogScreen> {
+
+  bool ischeck  = false;
+
   @override
   void initState() {
     super.initState();
@@ -423,17 +427,632 @@ class _CatalogScreenState extends State<CatalogScreen> {
       ),);
   }
 
-  Widget show1BAsket(BuildContext context){
+  Widget show1BAsket(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(32),topRight: Radius.circular(32))),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(32), topRight: Radius.circular(32))),
       backgroundColor: Colors.white,
-      insetPadding: EdgeInsets.only(top: 40),
-      child: ListView(
+      insetPadding: EdgeInsets.only(top: MediaQuery
+          .of(context)
+          .size
+          .height * 0.5),
+      child: Column(
         children: [
-
+          Container(
+            margin: EdgeInsets.all(30),
+            child: Column(
+              children: [
+                Text('Для кого вы заказываете', style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontStyle: FontStyle.normal,
+                    fontFamily: 'Roboto',
+                    fontSize: 24,
+                    color: Colors.black)),
+                Text(
+                    'Superfoods, органический порошок спирулины, 240 г (8,5 унции)?',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        fontFamily: 'Roboto',
+                        fontSize: 18,
+                        color: Colors.black)),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              children: [
+                listTileForDialogName(context),
+                listTileForDialogName(context),
+                listTileForDialogName(context),
+                Center(
+                  child: GestureDetector(
+                    onTap: (){
+                      showDialog(context: context, builder: (BuildContext context) => showReceptionTime(context));
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(0, 7, 14, 8),
+                      child: Container(
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(24),color: Color(0xFF478414)),
+                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          height: 56,
+                          width: 247,
+                          child: Center(
+                              child: Text('ВЫБРАТЬ',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontStyle: FontStyle.normal,
+                                      fontFamily: 'Roboto',
+                                      fontSize: 24,
+                                      color: Colors.white)))),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
         ],
       ),);
+  }
+
+  Widget showReceptionTime(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(32), topRight: Radius.circular(32))),
+      backgroundColor: Colors.white,
+      insetPadding: EdgeInsets.only(top: MediaQuery
+          .of(context)
+          .size
+          .height * 0.6),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.all(30),
+            child: Column(
+              children: [
+                Text('Время для приема:', style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontStyle: FontStyle.normal,
+                    fontFamily: 'Roboto',
+                    fontSize: 24,
+                    color: Colors.black)),
+                Text(
+                    'Superfoods, органический порошок спирулины, 240 г (8,5 унции)!',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        fontFamily: 'Roboto',
+                        fontSize: 18,
+                        color: Colors.black)),
+              ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: (){
+                  showDialog(context: context, builder: (BuildContext context) => CatalogScreen());
+                },
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(0, 7, 14, 8),
+                  child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(24),color: Color(0xFF478414)),
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      height: 56,
+                      width: 140,
+                      child: Center(
+                          child: Text('позже',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  fontFamily: 'Roboto',
+                                  fontSize: 24,
+                                  color: Colors.white)))),
+                ),
+              ),
+              GestureDetector(
+                onTap: (){
+                  showDialog(context: context, builder: (BuildContext context) => showReceptionTime2(context));
+                },
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(0, 7, 14, 8),
+                  child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(24),color: Color(0xFF478414)),
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      height: 56,
+                      width: 140,
+                      child: Center(
+                          child: Text('принял',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  fontFamily: 'Roboto',
+                                  fontSize: 22,
+                                  color: Colors.white)))),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),);
+  }
+
+  Widget showReceptionTime2(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(32), topRight: Radius.circular(32))),
+      backgroundColor: Colors.white,
+      insetPadding: EdgeInsets.only(top: MediaQuery
+          .of(context)
+          .size
+          .height * 0.3),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.all(30),
+            child: Column(
+              children: [
+                Text('Время для приема:', style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontStyle: FontStyle.normal,
+                    fontFamily: 'Roboto',
+                    fontSize: 24,
+                    color: Colors.black)),
+                Text(
+                    'Superfoods, органический порошок спирулины, 240 г (8,5 унции)!',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        fontFamily: 'Roboto',
+                        fontSize: 18,
+                        color: Colors.black)),
+              ],
+            ),
+          ),
+          ListView(
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            children: [
+              listTileForDialogTime(context),
+              listTileForDialogTime(context),
+              listTileForDialogTime(context),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: (){
+                  showDialog(context: context, builder: (BuildContext context) => showReceptionTime(context));
+                },
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(0, 7, 14, 8),
+                  child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(24),color: Color(0xFF478414)),
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      height: 56,
+                      width: 140,
+                      child: Center(
+                          child: Text('отмена',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  fontFamily: 'Roboto',
+                                  fontSize: 22,
+                                  color: Colors.white)))),
+                ),
+              ),
+              GestureDetector(
+                onTap: (){
+                  showDialog(context: context, builder: (BuildContext context) => showReceptionRecommendations(context));
+                },
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(0, 7, 14, 8),
+                  child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(24),color: Color(0xFF478414)),
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      height: 56,
+                      width: 140,
+                      child: Center(
+                          child: Text('выбор',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  fontFamily: 'Roboto',
+                                  fontSize: 24,
+                                  color: Colors.white)))),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),);
+  }
+
+  Widget showReceptionRecommendations(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(32), topRight: Radius.circular(32))),
+      backgroundColor: Colors.white,
+      insetPadding: EdgeInsets.only(top: MediaQuery
+          .of(context)
+          .size
+          .height * 0.6),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.all(30),
+            child: Column(
+              children: [
+                Text('Рекомендуем', style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontStyle: FontStyle.normal,
+                    fontFamily: 'Roboto',
+                    fontSize: 24,
+                    color: Colors.black)),
+                Text(
+                    'сдать повторно общий анализ крови для отслеживания изменений и загрузить анализы в ваш кабинет!',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        fontFamily: 'Roboto',
+                        fontSize: 18,
+                        color: Colors.black)),
+              ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: (){
+                  showDialog(context: context, builder: (BuildContext context) => CatalogScreen());
+                },
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(0, 7, 14, 8),
+                  child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(24),color: Color(0xFF478414)),
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      height: 56,
+                      width: 140,
+                      child: Center(
+                          child: Text('позже',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  fontFamily: 'Roboto',
+                                  fontSize: 16,
+                                  color: Colors.white)))),
+                ),
+              ),
+              GestureDetector(
+                onTap: (){
+                  showDialog(context: context, builder: (BuildContext context) => showReceptionRecommendations2(context));
+                },
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(0, 7, 14, 8),
+                  child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(24),color: Color(0xFF478414)),
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      height: 56,
+                      width: 140,
+                      child: Center(
+                          child: Text('Загрузить',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  fontFamily: 'Roboto',
+                                  fontSize: 16,
+                                  color: Colors.white)))),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),);
+  }
+
+  Widget showReceptionRecommendations2(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(32), topRight: Radius.circular(32))),
+      backgroundColor: Colors.white,
+      insetPadding: EdgeInsets.only(top: MediaQuery
+          .of(context)
+          .size
+          .height * 0.3),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.all(30),
+            child: Column(
+              children: [
+                Text('Рекомендуем', style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontStyle: FontStyle.normal,
+                    fontFamily: 'Roboto',
+                    fontSize: 24,
+                    color: Colors.black)),
+                Text(
+                    'сдать повторно общий анализ крови для отслеживания изменений и загрузить анализы в ваш кабинет!',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        fontFamily: 'Roboto',
+                        fontSize: 18,
+                        color: Colors.black)),
+              ],
+            ),
+          ),
+          ListView(
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            children: [
+              listTileForDialogTime2(context),
+              listTileForDialogTime2(context),
+              listTileForDialogTime2(context),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: (){
+                  showDialog(context: context, builder: (BuildContext context) => CatalogScreen());
+                },
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(0, 7, 14, 8),
+                  child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(24),color: Color(0xFF478414)),
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      height: 56,
+                      width: 140,
+                      child: Center(
+                          child: Text('Отмена',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  fontFamily: 'Roboto',
+                                  fontSize: 20,
+                                  color: Colors.white)))),
+                ),
+              ),
+              GestureDetector(
+                onTap: (){
+                  showDialog(context: context, builder: (BuildContext context) => showStocks(context));
+                },
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(0, 7, 14, 8),
+                  child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(24),color: Color(0xFF478414)),
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      height: 56,
+                      width: 140,
+                      child: Center(
+                          child: Text('Выбор',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  fontFamily: 'Roboto',
+                                  fontSize: 20,
+                                  color: Colors.white)))),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),);
+  }
+
+  Widget showStocks(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(32), topRight: Radius.circular(32))),
+      backgroundColor: Colors.white,
+      insetPadding: EdgeInsets.only(top: MediaQuery
+          .of(context)
+          .size
+          .height * 0.6),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.all(30),
+            child: Column(
+              children: [
+                Text('Рекомендуем', style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontStyle: FontStyle.normal,
+                    fontFamily: 'Roboto',
+                    fontSize: 24,
+                    color: Colors.black)),
+                Text(
+                    'сдатОльга, Superfoods, органический порошок спирулины, 240 г (8,5 унции) почти закончился :(Хотите приобрести?',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        fontFamily: 'Roboto',
+                        fontSize: 18,
+                        color: Colors.black)),
+              ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: (){
+                  showDialog(context: context, builder: (BuildContext context) => CatalogScreen());
+                },
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(0, 7, 14, 8),
+                  child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(24),color: Color(0xFF478414)),
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      height: 56,
+                      width: 140,
+                      child: Center(
+                          child: Text('позже',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  fontFamily: 'Roboto',
+                                  fontSize: 14,
+                                  color: Colors.white)))),
+                ),
+              ),
+              GestureDetector(
+                onTap: (){
+                  showDialog(context: context, builder: (BuildContext context) => showReceptionRecommendations2(context));
+                },
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(0, 7, 14, 8),
+                  child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(24),color: Color(0xFF478414)),
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      height: 56,
+                      width: 140,
+                      child: Center(
+                          child: Text('Приобрести',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  fontFamily: 'Roboto',
+                                  fontSize: 14,
+                                  color: Colors.white)))),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),);
+  }
+
+
+
+
+  Widget listTileForDialogName(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(bottom: 8),
+      decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: Color(0xFFF5FAFD), width: 1))),
+      child: ListTile(
+        onTap: (){
+          setState(() {
+            ischeck = !ischeck;
+          });
+        },
+        trailing: Neumorphic(
+          child: Container(height: 20, width: 20, decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              color: Colors.white
+          ),
+            child: ischeck ? Center(
+              child: Container(height: 15, width: 15, decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: Color(0xFF478414)
+              ),
+              ),
+            ) : Container(),
+          ),
+        ),
+        leading: Image.asset('assets/grandMother.png'),
+        title: Column(children: [
+          Text('Ольга Луценко', style: TextStyle(
+              fontWeight: FontWeight.w400,
+              fontStyle: FontStyle.normal,
+              fontFamily: 'Roboto',
+              fontSize: 16,
+              color: Colors.black)),
+          Text('35 лет, ж', style: TextStyle(
+              fontWeight: FontWeight.w300,
+              fontStyle: FontStyle.normal,
+              fontFamily: 'Roboto',
+              fontSize: 12,
+              color: Colors.black)),
+        ],),
+      ),
+    );
+  }
+
+  Widget listTileForDialogTime(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(bottom: 8),
+      decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: Color(0xFFF5FAFD), width: 1))),
+      child: ListTile(
+        onTap: (){
+          setState(() {
+            ischeck = !ischeck;
+          });
+        },
+        trailing: Neumorphic(
+          child: Container(height: 20, width: 20, decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              color: Colors.white
+          ),
+            child: ischeck ? Center(
+              child: Container(height: 15, width: 15, decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: Color(0xFF478414)
+              ),
+              ),
+            ) : Container(),
+          ),
+        ),
+        // leading: Image.asset('assets/grandMother.png'),
+        title:           Text('Через 30 мин', style: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontStyle: FontStyle.normal,
+            fontFamily: 'Roboto',
+            fontSize: 16,
+            color: Colors.black)),
+      ),
+    );
+  }
+
+  Widget listTileForDialogTime2(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(bottom: 8),
+      decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: Color(0xFFF5FAFD), width: 1))),
+      child: ListTile(
+        onTap: (){
+          setState(() {
+            ischeck = !ischeck;
+          });
+        },
+        trailing: Neumorphic(
+          child: Container(height: 20, width: 20, decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              color: Colors.white
+          ),
+            child: ischeck ? Center(
+              child: Container(height: 15, width: 15, decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: Color(0xFF478414)
+              ),
+              ),
+            ) : Container(),
+          ),
+        ),
+        // leading: Image.asset('assets/grandMother.png'),
+        title: Text('Завтра', style: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontStyle: FontStyle.normal,
+            fontFamily: 'Roboto',
+            fontSize: 16,
+            color: Colors.black)),
+      ),
+    );
   }
 
 }
