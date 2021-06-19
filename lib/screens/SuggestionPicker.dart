@@ -36,8 +36,23 @@ class _SuggestionPickerState extends State<SuggestionPicker> {
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  new Text(_symptoms[i].name, style: new TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),),
-                  new Text("Нажмите, чтобы посмотреть рекомендуемые анализы", style: new TextStyle(fontSize: 10.0),)
+                  new Text(
+                    _symptoms[i].name,
+                    style: new TextStyle(
+                        color: Color(0xFF478414),
+                        fontSize: 20.0,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  new Text(
+                    "Нажмите, чтобы посмотреть рекомендуемые анализы",
+                    style: new TextStyle(
+                        fontSize: 10.0,
+                        fontFamily: 'Roboto',
+                        color: Color(0xFF2E2E2E)
+                    ),
+                  )
                 ],
               ),
               children: <Widget>[
@@ -68,7 +83,12 @@ class _SuggestionPickerState extends State<SuggestionPicker> {
           },
           child: new ListTile(
             title: Text(
-              element.name, style: new TextStyle(fontSize: 18.0),
+              element.name,
+              style: new TextStyle(
+                  fontSize: 18.0,
+                  fontFamily: 'Roboto',
+                  color: Color(0xFF478414),
+              ),
             ),
           ),
         ),

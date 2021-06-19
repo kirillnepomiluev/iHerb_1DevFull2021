@@ -75,10 +75,16 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
                       child: Text(
                         "Загрузка анализов",
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headline3,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.normal,
+                            fontFamily: 'Roboto',
+                            fontSize: 15,
+                            color: Colors.white
+                        ),
                       ),
                       style: NeumorphicStyle(
-
+                        color: Color(0xFF478414),
                       ),
                     ),
                   )

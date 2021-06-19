@@ -107,5 +107,9 @@ const redSelected = const Color(0xFFFF0000); // те
 
 const green_Light = const Color(0xFF94D065); //
 const orange_Light = const Color(0xFFFFF5DE); //
+const red_Light = const Color(0xFFFFEEEA); //
 const salat_Light = const Color(0xFFE3FCE9); //
 const rozov_Light = const Color(0xFFFFEEEA); //
+const yellow_light = const Color(0xFFFFF5DE);
+const blue_light = const Color(0xFFE9F7FF);
+
