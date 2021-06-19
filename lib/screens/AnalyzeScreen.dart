@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:iherb_helper/models/analyze.dart';
 import 'package:iherb_helper/models/analyzeIndicator.dart';
+import 'package:iherb_helper/models/supplement.dart';
 import 'package:iherb_helper/utils/cameraPreviewScanner.dart';
 import 'package:iherb_helper/utils/textDetectorPainter.dart';
 import 'package:iherb_helper/utils/utils.dart' as utils;
@@ -16,23 +17,24 @@ import 'package:flutter/foundation.dart';
 class AnalyzeScreen extends StatefulWidget {
 
   Analyze _analyze;
+  bool _recognitionProcess;
 
-  AnalyzeScreen(this._analyze);
+  AnalyzeScreen(this._analyze, this._recognitionProcess);
 
   @override
-  _AnalyzeScreenState createState() => _AnalyzeScreenState(_analyze);
+  _AnalyzeScreenState createState() => _AnalyzeScreenState(_analyze, _recognitionProcess);
 
 }
 
 class _AnalyzeScreenState extends State<AnalyzeScreen> {
 
-  _AnalyzeScreenState(this._analyze);
+  _AnalyzeScreenState(this._analyze, this._recognitionProcess);
 
   bool _load = false;
   bool _recognitionProcess = false;
   Analyze _analyze;
   FirebaseFirestore store = FirebaseFirestore.instance;
-  List<AnalyzeIndicator> _indicators = [];
+  List<Supplement> _supplements = [];
   CameraDescription _cameraDescription;
   CameraController _camera;
 
@@ -54,7 +56,7 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
             children : [
               Text(
                 _analyze.description,
-                style: Theme.of(context).textTheme.headline3,
+                style: Theme.of(context).textTheme.bodyText2,
               ),
               utils.topBottomPadding(
                 Text(
@@ -67,9 +69,12 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
                     width: 150,
                     child: NeumorphicButton(
                       onPressed: () {
+                        setState(() {
+                          _recognitionProcess = true;
+                        });
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => CameraPreviewScanner(_camera),
+                            builder: (context) => CameraPreviewScanner(_camera, _analyze),
                           ),
                         );
                       },
@@ -84,14 +89,34 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
                     ),
                   )
               ),
-              Expanded(
+              _recognitionProcess ? utils.topBottomPadding(Text("Продукты на основании ваших анализов:", style: Theme.of(context).textTheme.headline5)) : Container(),
+              _recognitionProcess ? Expanded(
                 child: ListView.builder(
-                  itemCount: _indicators.length,
+             /*     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 5.0,
+                    crossAxisSpacing: 5.0,
+                  ), */
+                  itemCount: _supplements.length,
                   itemBuilder: (context, i) {
-                    return Text(_indicators.elementAt(i).name);
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
+                          child: Image.network(
+                              _supplements.elementAt(i).image,
+                              width: 90.0,
+                              height: 90.0,
+                              fit: BoxFit.fill),
+                        ),
+                        Expanded(child: Text(_supplements.elementAt(i).name)),
+                      ],
+                    );
                   },
                 ),
-              )
+              ) : Container()
             ] ,
           )
       ),
@@ -99,13 +124,14 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
     );
   }
 
+
   void getIndicators() async {
 
     setState(() {
       _load = true;
     });
 
-    List<AnalyzeIndicator> indicators = [];
+    List<Supplement> supplements = [];
     CameraLensDirection _direction = CameraLensDirection.back;
     CameraDescription cameraDescription =  await scannerUtils.ScannerUtils.getCamera(_direction);
     setState(() {
@@ -120,16 +146,17 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
     });
 
     await store
-        .collection("analyzeIndicators")
-        .where("analyzeId", isEqualTo: _analyze.id)
+        .collection("supplements")
+        .where("analyze", isEqualTo: _analyze.id)
         .get()
         .then((value) => value.docs
-        .forEach((element) => indicators.add(AnalyzeIndicator.fromMap(element.data()))));
+        .forEach((element) => supplements.add(Supplement.fromMap(element.data()))));
 
-    debugPrint("indicators" + indicators.toString());
+
+    debugPrint("indicators" + supplements.toString());
 
     setState(() {
-      _indicators = indicators;
+      _supplements = supplements;
       _load = false;
     });
 

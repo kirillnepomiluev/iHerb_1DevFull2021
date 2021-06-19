@@ -35,7 +35,7 @@ class AppScaffold extends StatelessWidget {
             fontWeight: FontWeight.w700,
             fontStyle: FontStyle.normal,
             fontFamily: 'Roboto',
-            fontSize: 30,
+            fontSize: 18,
             color: Colors.black)),
         actions: [
           actionsBasket ? IconButton(icon: Icon(Icons.shopping_basket_outlined,size: 28,color: Colors.black,), onPressed: (){}) : Container(),
