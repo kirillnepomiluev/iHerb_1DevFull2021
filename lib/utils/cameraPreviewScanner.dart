@@ -1,25 +1,31 @@
+import 'dart:async';
+
 import 'package:camera/camera.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:iherb_helper/models/analyze.dart';
+import 'package:iherb_helper/screens/AnalyzeScreen.dart';
 
 import 'detectorPainters.dart';
 import 'scannerUtils.dart';
 
 class CameraPreviewScanner extends StatefulWidget {
-  CameraPreviewScanner(this._camera);
+  CameraPreviewScanner(this._camera, this._analyze);
 
   CameraController _camera;
+  Analyze _analyze;
 
   @override
-  State<StatefulWidget> createState() => _CameraPreviewScannerState(_camera);
+  State<StatefulWidget> createState() => _CameraPreviewScannerState(_camera, _analyze);
 }
 
 class _CameraPreviewScannerState extends State<CameraPreviewScanner> {
 
-  _CameraPreviewScannerState(this._camera);
+  _CameraPreviewScannerState(this._camera, this._analyze);
   dynamic _scanResults;
   CameraController _camera;
+  Analyze _analyze;
   Detector _currentDetector = Detector.text;
   bool _isDetecting = false;
   VisionText _textScanResults;
@@ -40,6 +46,20 @@ class _CameraPreviewScannerState extends State<CameraPreviewScanner> {
   void initState() {
     super.initState();
     _initializeCamera();
+    initiateRoute();
+  }
+
+  void route(){
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => AnalyzeScreen(_analyze, true),
+      ),
+    );
+  }
+
+  initiateRoute(){
+    var duration = Duration(seconds: 5);
+    return Timer(duration, route);
   }
 
   Future<void> _initializeCamera() async {

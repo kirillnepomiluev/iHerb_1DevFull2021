@@ -62,7 +62,7 @@ class _SuggestionPickerState extends State<SuggestionPicker> {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => AnalyzeScreen(element),
+                builder: (context) => AnalyzeScreen(element, false),
               ),
             );
           },

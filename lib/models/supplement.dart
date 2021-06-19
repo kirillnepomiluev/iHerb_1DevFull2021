@@ -4,6 +4,7 @@ class Supplement {
 
   String name;
   String image;
+  String analyze;
   List<String> diagnoses;
   List<String> analyzeIndicatorsCarefully;
   List<String> analyzeIndicators;
@@ -12,6 +13,7 @@ class Supplement {
       :
         name = snapshot['name'] ?? '',
         image = snapshot['image'] ?? '',
+        analyze = snapshot['analyze'] ?? '',
         diagnoses = snapshot['diagnoses'] != null ? List.from(snapshot['diagnoses']) : List(),
         analyzeIndicatorsCarefully = snapshot['analyzeIndicatorsCarefully'] != null ? List.from(snapshot['analyzeIndicatorsCarefully']) : List(),
         analyzeIndicators = snapshot['analyzeIndicators'] != null ? List.from(snapshot['analyzeIndicators']) : List();
