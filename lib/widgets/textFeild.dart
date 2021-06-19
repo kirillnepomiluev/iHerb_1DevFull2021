@@ -4,10 +4,12 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 class TextFieldNeo extends StatefulWidget {
   final String label;
   final String hint;
+  final IconData icon;
 
   final ValueChanged<String> onChanged;
 
-  TextFieldNeo({@required this.label, @required this.hint, this.onChanged});
+  TextFieldNeo(
+      {@required this.label, @required this.hint, this.onChanged, this.icon});
 
   @override
   _TextFieldNeoState createState() => _TextFieldNeoState();
@@ -28,7 +30,7 @@ class _TextFieldNeoState extends State<TextFieldNeo> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12),
           child: Text(
             this.widget.label,
             style: TextStyle(
@@ -38,16 +40,30 @@ class _TextFieldNeoState extends State<TextFieldNeo> {
           ),
         ),
         Neumorphic(
-          margin: EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 4),
+          margin: EdgeInsets.only(left: 24, right: 24, top: 12, bottom: 12),
           style: NeumorphicStyle(
+            color: Color(0xFFF5FCFD),
             depth: NeumorphicTheme.embossDepth(context),
             boxShape: NeumorphicBoxShape.stadium(),
           ),
-          padding: EdgeInsets.symmetric(vertical: 14, horizontal: 18),
-          child: TextField(
-            onChanged: this.widget.onChanged,
-            controller: _controller,
-            decoration: InputDecoration.collapsed(hintText: this.widget.hint),
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 18),
+          child: Row(
+            children: [
+              Container(
+                height:15,
+                width: 15,
+                child: Icon(
+                  this.widget.icon,
+                  color: Color(0xFF999999),
+                ),
+              ),
+              TextField(
+                onChanged: this.widget.onChanged,
+                controller: _controller,
+                decoration:
+                    InputDecoration.collapsed(hintText: this.widget.hint),
+              ),
+            ],
           ),
         )
       ],

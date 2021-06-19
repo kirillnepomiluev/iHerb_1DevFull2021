@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:iherb_helper/widgets/app_scaffold.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:iherb_helper/widgets/textFeild.dart';
 
 import '../settingsPage.dart';
 
@@ -71,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           bannerFace(context),
-
+          TextFieldNeo(hint: 'Город',icon: Icons.location_on_outlined,onChanged: (value){},label: '',)
         ]);
   }
 
