@@ -201,7 +201,7 @@ print('FOUND ' + term + ' ' + stringValue);
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ML Vision Example'),
+        title: const Text('Наведите на лист результатов анализа'),
       ),
       body: _buildImage(),
     );

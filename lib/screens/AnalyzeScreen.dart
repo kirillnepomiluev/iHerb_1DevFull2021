@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:iherb_helper/models/analyze.dart';
 import 'package:iherb_helper/models/analyzeIndicator.dart';
+import 'package:iherb_helper/screens/analysis_result/analysis_result.dart';
 import 'package:iherb_helper/utils/cameraPreviewScanner.dart';
 import 'package:iherb_helper/utils/textDetectorPainter.dart';
 import 'package:iherb_helper/utils/utils.dart' as utils;
@@ -111,8 +112,13 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
       ),
     );
 
-    setState(() {
-    });
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => AnalysisResultScreen(),
+      ),
+    );
+    // setState(() {
+    // });
   }
 
   void getIndicators() async {

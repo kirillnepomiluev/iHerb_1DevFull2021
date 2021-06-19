@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class MapTable extends StatelessWidget {
   final Map<String, dynamic> map;
@@ -33,10 +34,17 @@ class MapTable extends StatelessWidget {
 
     return Container(
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Column(children: keys),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: keys,
+          ),
           Container(width: 10),
-          Column(children: values),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: values,
+          ),
         ],
       ),
     );
