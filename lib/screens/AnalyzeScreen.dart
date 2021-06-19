@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:iherb_helper/models/analyze.dart';
 import 'package:iherb_helper/models/analyzeIndicator.dart';
-import 'package:iherb_helper/models/supplement.dart';
 import 'package:iherb_helper/utils/cameraPreviewScanner.dart';
 import 'package:iherb_helper/utils/textDetectorPainter.dart';
 import 'package:iherb_helper/utils/utils.dart' as utils;
@@ -13,28 +12,30 @@ import 'package:iherb_helper/utils/scannerUtils.dart' as scannerUtils;
 import 'package:iherb_helper/widgets/app_scaffold.dart';
 import 'package:iherb_helper/themes/themes.dart' as themes;
 import 'package:flutter/foundation.dart';
+import 'package:iherb_helper/widgets/map_table.dart';
+
+final recognized = <String, double>{};
 
 class AnalyzeScreen extends StatefulWidget {
 
   Analyze _analyze;
-  bool _recognitionProcess;
 
-  AnalyzeScreen(this._analyze, this._recognitionProcess);
+  AnalyzeScreen(this._analyze);
 
   @override
-  _AnalyzeScreenState createState() => _AnalyzeScreenState(_analyze, _recognitionProcess);
+  _AnalyzeScreenState createState() => _AnalyzeScreenState(_analyze);
 
 }
 
 class _AnalyzeScreenState extends State<AnalyzeScreen> {
 
-  _AnalyzeScreenState(this._analyze, this._recognitionProcess);
+  _AnalyzeScreenState(this._analyze);
 
   bool _load = false;
   bool _recognitionProcess = false;
   Analyze _analyze;
   FirebaseFirestore store = FirebaseFirestore.instance;
-  List<Supplement> _supplements = [];
+  List<AnalyzeIndicator> _indicators = [];
   CameraDescription _cameraDescription;
   CameraController _camera;
 
@@ -56,7 +57,7 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
             children : [
               Text(
                 _analyze.description,
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.headline3,
               ),
               utils.topBottomPadding(
                 Text(
@@ -68,13 +69,7 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
                     height: 60,
                     width: 150,
                     child: NeumorphicButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => CameraPreviewScanner(_camera, _analyze),
-                          ),
-                        );
-                      },
+                      onPressed: () => _scan(context),
                       child: Text(
                         "Загрузка анализов",
                         textAlign: TextAlign.center,
@@ -86,34 +81,17 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
                     ),
                   )
               ),
-              _recognitionProcess ? utils.topBottomPadding(Text("Продукты на основании ваших анализов:", style: Theme.of(context).textTheme.headline5)) : Container(),
-              _recognitionProcess ? Expanded(
-                child: ListView.builder(
-             /*     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    mainAxisSpacing: 5.0,
-                    crossAxisSpacing: 5.0,
-                  ), */
-                  itemCount: _supplements.length,
-                  itemBuilder: (context, i) {
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
-                          child: Image.network(
-                              _supplements.elementAt(i).image,
-                              width: 90.0,
-                              height: 90.0,
-                              fit: BoxFit.fill),
-                        ),
-                        Expanded(child: Text(_supplements.elementAt(i).name)),
-                      ],
-                    );
-                  },
-                ),
-              ) : Container()
+              MapTable(
+                map: recognized,
+              ),
+              // Expanded(
+              //   child: ListView.builder(
+              //     itemCount: _indicators.length,
+              //     itemBuilder: (context, i) {
+              //       return Text(_indicators.elementAt(i).name);
+              //     },
+              //   ),
+              // )
             ] ,
           )
       ),
@@ -121,6 +99,21 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
     );
   }
 
+  void _scan(BuildContext context) async {
+    recognized.clear();
+
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => CameraPreviewScanner(
+          recognized: recognized,
+          camera: _camera,
+        ),
+      ),
+    );
+
+    setState(() {
+    });
+  }
 
   void getIndicators() async {
 
@@ -128,7 +121,7 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
       _load = true;
     });
 
-    List<Supplement> supplements = [];
+    List<AnalyzeIndicator> indicators = [];
     CameraLensDirection _direction = CameraLensDirection.back;
     CameraDescription cameraDescription =  await scannerUtils.ScannerUtils.getCamera(_direction);
     setState(() {
@@ -143,17 +136,16 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
     });
 
     await store
-        .collection("supplements")
-        .where("analyze", isEqualTo: _analyze.id)
+        .collection("analyzeIndicators")
+        .where("analyzeId", isEqualTo: _analyze.id)
         .get()
         .then((value) => value.docs
-        .forEach((element) => supplements.add(Supplement.fromMap(element.data()))));
+        .forEach((element) => indicators.add(AnalyzeIndicator.fromMap(element.data()))));
 
-
-    debugPrint("indicators" + supplements.toString());
+    debugPrint("indicators" + indicators.toString());
 
     setState(() {
-      _supplements = supplements;
+      _indicators = indicators;
       _load = false;
     });
 
