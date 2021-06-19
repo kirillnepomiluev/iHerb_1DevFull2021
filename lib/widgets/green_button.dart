@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// основной виджет кнопки
 class GreenButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;

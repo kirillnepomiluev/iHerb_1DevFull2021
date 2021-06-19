@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iherb_helper/widgets/app_scaffold.dart';
 
+/// экран корзины
 class BasketPage extends StatefulWidget {
   @override
   _BasketPageState createState() => _BasketPageState();

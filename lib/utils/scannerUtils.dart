@@ -6,6 +6,7 @@ import 'package:camera/camera.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/foundation.dart';
 
+/// Утилитный класс для распознавания текста
 class ScannerUtils {
   ScannerUtils._();
 

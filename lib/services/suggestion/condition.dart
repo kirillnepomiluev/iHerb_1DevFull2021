@@ -3,6 +3,7 @@ import 'package:iherb_helper/models/condition.dart';
 
 import 'firebase.dart';
 
+/// реализация полнотекстового поиска
 class ConditionSuggestionService extends FirestoreSuggestionService<Condition> {
   static const _collectionName = 'conditions';
 

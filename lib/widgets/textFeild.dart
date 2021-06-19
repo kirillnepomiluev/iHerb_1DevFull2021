@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
+/// виджет для текстового поля
 class TextFieldNeo extends StatefulWidget {
   final String label;
   final String hint;

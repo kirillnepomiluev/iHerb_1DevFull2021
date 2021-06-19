@@ -1,4 +1,5 @@
 
+/// Индикатор анализа с референсными значениями
 class AnalyzeIndicator {
 
   String name;

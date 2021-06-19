@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
+/// показать корзину
 Widget show1BAsket(BuildContext context) {
   return Dialog(
     shape: RoundedRectangleBorder(

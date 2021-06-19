@@ -17,6 +17,7 @@ import 'package:iherb_helper/widgets/map_table.dart';
 
 final recognized = <String, double>{};
 
+/// экран анализа и загрузки результатов
 class AnalyzeScreen extends StatefulWidget {
 
   Analyze _analyze;

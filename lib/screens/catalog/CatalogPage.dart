@@ -12,6 +12,8 @@ import 'package:iherb_helper/widgets/textFeild.dart';
 import '../dialog.dart';
 import '../settingsPage.dart';
 
+
+/// экран каталога
 class CatalogScreen extends StatefulWidget {
   @override
   _CatalogScreenState createState() => _CatalogScreenState();
@@ -36,6 +38,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
     );
   }
 
+  /// столбец с профилем
   Widget profileContentColumn(
     BuildContext context, {
     String profilePhotoUrl,
@@ -67,6 +70,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
     );
   }
 
+  /// Виджет с товаром
   Widget bannerPosition(BuildContext context,
       {Color color = orange_Light,
       String section = 'Витамины, Микроэлементы',
@@ -150,6 +154,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
     );
   }
 
+  /// Виджет кнопки
   Widget myGradientButton(BuildContext context,
       {String btnText = " ", void Function() funk}) {
     return RaisedButton(
@@ -178,6 +183,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
     );
   }
 
+  /// часть виджета карточки товара
   Widget oneEl(BuildContext context,{Color color,String image,String name}) {
     return Container(
       height: 64,
@@ -202,6 +208,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
   }
 
 
+  /// виджет карточки товара
   Widget showPosition(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -427,6 +434,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
       ),);
   }
 
+  /// виджет корзины
   Widget show1BAsket(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -498,6 +506,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
       ),);
   }
 
+  /// виджет графика приема препарата
   Widget showReceptionTime(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -582,6 +591,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
       ),);
   }
 
+  /// второй виджет графика приема препарата
   Widget showReceptionTime2(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -675,6 +685,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
       ),);
   }
 
+  /// виджет рекомендаций
   Widget showReceptionRecommendations(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -759,6 +770,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
       ),);
   }
 
+  /// второй виджет рекомендаций
   Widget showReceptionRecommendations2(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -852,6 +864,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
       ),);
   }
 
+  /// показать рекомендации
   Widget showStocks(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -939,6 +952,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
 
 
 
+  /// показать диалоговое окно с профилем
   Widget listTileForDialogName(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(bottom: 8),
@@ -983,6 +997,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
     );
   }
 
+  /// показать диалоговое окно с временем приема
   Widget listTileForDialogTime(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(bottom: 8),
@@ -1019,6 +1034,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
     );
   }
 
+  /// показать второе диалоговое окно с временем приема
   Widget listTileForDialogTime2(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(bottom: 8),

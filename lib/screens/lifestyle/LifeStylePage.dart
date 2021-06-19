@@ -10,6 +10,7 @@ import 'package:iherb_helper/widgets/textFeild.dart';
 
 import '../settingsPage.dart';
 
+/// Экран "Стиль жизни"
 class LifeStyleScreen extends StatefulWidget {
   @override
   _LifeStyleScreenState createState() => _LifeStyleScreenState();
@@ -56,6 +57,7 @@ class _LifeStyleScreenState extends State<LifeStyleScreen> {
     );
   }
 
+  /// основная информация экрана
   Widget _bannerFace(BuildContext context,{Color color = orange_Light,
     String section = 'Сон',
     String name = '03:00 - 07:20',

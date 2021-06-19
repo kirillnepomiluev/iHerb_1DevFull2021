@@ -11,6 +11,7 @@ import 'package:iherb_helper/themes/colors.dart';
 
 import '../icons.dart';
 
+/// каркас UI приложения
 class AppScaffold extends StatelessWidget {
   final String title;
   final Widget child;

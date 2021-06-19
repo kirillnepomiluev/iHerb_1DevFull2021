@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// экран выбора фотографии
 class RecognizeScreen extends StatefulWidget {
   @override
   _RecognizeScreenState createState() => _RecognizeScreenState();

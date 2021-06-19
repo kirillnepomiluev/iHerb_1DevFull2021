@@ -7,6 +7,7 @@ import 'package:iherb_helper/widgets/map_table.dart';
 import 'detectorPainters.dart';
 import 'scannerUtils.dart';
 
+/// Сканнер результатов анализов с помощью камеры
 class CameraPreviewScanner extends StatefulWidget {
   final Map<String, double> recognized;
 

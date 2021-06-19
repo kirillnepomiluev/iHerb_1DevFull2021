@@ -7,6 +7,7 @@ import 'package:iherb_helper/widgets/text_field_decoration.dart';
 import 'abstract.dart';
 import 'decoration.dart';
 
+/// служебный виджет для автозаполнения
 class ModelAutocompleteWidget<T extends WithIdTitle<String>> extends StatefulWidget {
   final TextValueEditorController<T> controller;
   final int minLength;

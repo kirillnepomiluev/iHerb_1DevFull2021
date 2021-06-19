@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// иконки
 class MyFlutterApp {
   MyFlutterApp._();
 

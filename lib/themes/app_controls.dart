@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:iherb_helper/themes/colors.dart';
 import 'package:flutter/material.dart';
 
+/// служебный класс для темы приложения
 class AppControlsThemeData {
   final Color checkboxBorderColor;
   final Color checkboxBackgroundColor;

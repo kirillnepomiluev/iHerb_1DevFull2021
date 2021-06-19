@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
 
+/// Детектор текста на изображении
 class TextDetectorPainter extends CustomPainter {
   TextDetectorPainter(this.absoluteImageSize, this.visionText);
 

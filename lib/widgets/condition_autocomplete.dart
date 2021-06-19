@@ -5,6 +5,7 @@ import 'package:iherb_helper/services/suggestion/condition.dart';
 import 'abstract.dart';
 import 'model_autocomplete.dart';
 
+/// виджет автозаполнения
 class ConditionAutocompleteWidget extends StatelessWidget {
   final String label;
   final WithIdTitleEditorController<String, Condition> controller;

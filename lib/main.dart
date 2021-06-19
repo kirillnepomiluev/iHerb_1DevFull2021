@@ -10,6 +10,8 @@ import 'package:iherb_helper/widgets/app_scaffold.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// точка входа в приложение
+
 String versoinApp = "1.0.0 от 18.06.2021";
 
 SharedPreferences prefs;

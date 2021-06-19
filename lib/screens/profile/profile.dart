@@ -14,6 +14,7 @@ class ProfileScreen extends StatefulWidget {
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
+/// экран с профилем
 class _ProfileScreenState extends State<ProfileScreen> {
   Isolate isolate;
 

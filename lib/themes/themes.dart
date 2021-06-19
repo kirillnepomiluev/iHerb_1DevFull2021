@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'colors.dart';
 
+/// служебный класс для темы приложения
+
 enum MyThemeKeys {LIGHTFC, DARKFC}
 
 class MyThemes {

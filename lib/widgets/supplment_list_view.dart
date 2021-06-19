@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iherb_helper/models/supplement.dart';
 
+/// виджет списка БАДов
 class SupplementsListView extends StatelessWidget {
   final List<Supplement> supplements;
 

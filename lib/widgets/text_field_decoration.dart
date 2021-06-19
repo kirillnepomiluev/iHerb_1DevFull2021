@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// виджет для стилей текстового поля
 class TextFieldDecorationWidget extends StatelessWidget {
   final BoxDecoration boxDecoration;
   final Widget child;

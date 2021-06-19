@@ -4,6 +4,7 @@ import 'package:iherb_helper/models/supplement.dart';
 import 'package:iherb_helper/widgets/app_scaffold.dart';
 import 'package:iherb_helper/widgets/supplment_list_view.dart';
 
+/// Подборщик БАДов по витанинам
 class SuggestedItemsScreen extends StatelessWidget {
   final String component;
 

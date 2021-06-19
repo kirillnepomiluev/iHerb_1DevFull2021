@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/// функция, используемая в полнотекстовом поиске
 List<String> textToSearchTerms(String text) {
   return text.trim().toLowerCase().split(RegExp(r'\s+'));
 }
 
+/// виджет загрузки
 Widget loadindWidget() {
   return Center(
     child: new Container(
@@ -20,6 +22,7 @@ Widget loadindWidget() {
       );
     }
 
+/// стандартный виджет отступа
 Widget standartPadding(Widget widget) {
   return Padding(
     padding: EdgeInsets.all(5.0),
@@ -27,6 +30,7 @@ Widget standartPadding(Widget widget) {
   );
 }
 
+/// виджет отступа сверху и снизу
 Widget topBottomPadding(Widget widget) {
   return Padding(
     padding: EdgeInsets.only(top: 10.0, bottom: 10.0),

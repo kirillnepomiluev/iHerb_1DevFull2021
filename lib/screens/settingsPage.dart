@@ -7,7 +7,7 @@ import 'package:iherb_helper/widgets/app_scaffold.dart';
 import '../main.dart';
 
 
-
+/// экран настроек
 class SettingPage extends StatefulWidget {
   bool fromTitle;
   SettingPage ({this.fromTitle = false});

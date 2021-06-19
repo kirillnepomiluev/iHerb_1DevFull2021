@@ -8,6 +8,7 @@ import 'abstract.dart';
 
 typedef FutureOr<Iterable<T>> SuggestionsCallback<T>(String pattern);
 
+/// интерфейс полнотекстового поиска
 abstract class FirestoreSuggestionService<T extends WithIdTitle<String>> extends AbstractSuggestionService<T> {
   Future<List<T>> suggest(String str) {
     return (str == '')

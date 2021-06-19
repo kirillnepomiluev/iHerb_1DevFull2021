@@ -1,6 +1,7 @@
 import 'package:iherb_helper/models/abstract.dart';
 import 'package:meta/meta.dart';
 
+/// Реализация модели данных для быстрого поиска
 class Condition implements WithIdTitle<String> {
   final String id;
   final String title;

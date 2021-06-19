@@ -12,6 +12,7 @@ class SearchScreen extends StatefulWidget {
   _SearchScreenState createState() => _SearchScreenState();
 }
 
+/// виджет поиска
 class _SearchScreenState extends State<SearchScreen> {
   final _conditionController = WithIdTitleEditorController<String, Condition>();
 

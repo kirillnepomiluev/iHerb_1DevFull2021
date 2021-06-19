@@ -5,6 +5,7 @@ import 'package:iherb_helper/widgets/app_scaffold.dart';
 import 'package:iherb_helper/widgets/green_button.dart';
 import 'package:iherb_helper/widgets/map_table.dart';
 
+/// Экран с отсканированными результатами аназила
 class AnalysisResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -15,6 +16,7 @@ class AnalysisResultScreen extends StatelessWidget {
     );
   }
 
+  /// основной виджет экрана
   Widget _getContent(BuildContext context) {
     return Column(
       children: [
@@ -47,6 +49,7 @@ class AnalysisResultScreen extends StatelessWidget {
     );
   }
 
+  /// кнопка Рекомендации
   Widget _getSuggestionsButton(BuildContext context) {
     final lack = _getLack();
     if (lack == null) return Container();
@@ -56,6 +59,7 @@ class AnalysisResultScreen extends StatelessWidget {
     );
   }
 
+  /// показать рекомендации
   void _showRecommendedItems(BuildContext context) {
     final lack = _getLack();
 

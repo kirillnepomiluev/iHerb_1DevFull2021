@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// служебный класс для цветовой схемы приложения
+
 const mainbossOfLifeAppDarkBlue = const Color(0xFF09121C);
 const mainbossOfLifeAppBackground = const Color(0xFFF0F0F2);
 const mainbossFilterBackground = const Color(0xFFF8F8F8);
