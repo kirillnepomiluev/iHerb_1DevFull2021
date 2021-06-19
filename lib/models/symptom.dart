@@ -1,8 +1,11 @@
 
+import 'package:iherb_helper/models/analyze.dart';
+
 class Symptom {
 
   String name;
   List<String> analyzes;
+  List<Analyze> analyzesList = [];
 
   Symptom.fromMap(Map<String, dynamic> snapshot)
       :
@@ -15,13 +18,14 @@ class Symptom {
       other is Symptom &&
           runtimeType == other.runtimeType &&
           name == other.name &&
-          analyzes == other.analyzes;
+          analyzes == other.analyzes &&
+          analyzesList == other.analyzesList;
 
   @override
-  int get hashCode => name.hashCode ^ analyzes.hashCode;
+  int get hashCode => name.hashCode ^ analyzes.hashCode ^ analyzesList.hashCode;
 
   @override
   String toString() {
-    return 'Symptom{name: $name, analyzes: $analyzes}';
+    return 'Symptom{name: $name, analyzes: $analyzes, analyzesList: $analyzesList}';
   }
 }
