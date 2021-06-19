@@ -54,7 +54,7 @@ class _LifeStyleScreenState extends State<LifeStyleScreen> {
                 asset: 'assets/IconTimeSleep.png',
                 section: 'Сон',
                 sectionColor: Color(0xFF478414),
-                index: '80 уд./мин.',
+                index: '4 ч. 20 мин.',
                 conclusion: "Стал хуже на 53%",
                 conclusionColor: Color(0xFFFB575A),
                 name: '03:00 - 07:20',
