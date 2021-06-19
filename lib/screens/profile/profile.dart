@@ -8,7 +8,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../settingsPage.dart';
 
 class ProfileScreen extends StatefulWidget {
-
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
@@ -33,10 +32,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .doc("NjJrmXCopAGttbkKame2")
         .get()
         .then((value) {
-          setState(() {
-            dsuser = value;
-            map = dsuser.data();
-          });
+      setState(() {
+        dsuser = value;
+        map = dsuser.data();
+      });
     });
   }
 
@@ -50,8 +49,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return AppScaffold(
       child: profileContentColumn(context),
-      title: "Profile",
+      title: "Профиль",
       index: 2,
+      actionsBasket: true,
     );
   }
 
@@ -66,114 +66,105 @@ class _ProfileScreenState extends State<ProfileScreen> {
     String profileTarget = " Цель не указана",
   }) {
     return Column(
-        mainAxisSize: MainAxisSize.max,
+        // mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              GestureDetector(
-                  onTap: () {
-                    // FirebaseAuth.instance.signOut();
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SettingPage()),);
-                  },
-                  child: Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Icon(Icons.settings,
-                          size: 40.0,
-                          color: Theme.of(context)
-                              .tabBarTheme
-                              .unselectedLabelColor))),
-              GestureDetector(
-                  onTap: () {
-                    // FirebaseAuth.instance.signOut();
-                    Navigator.pushNamed(context, "/signin");
-                  },
-                  child: Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Icon(Icons.exit_to_app,
-                          size: 40.0,
-                          color: Theme.of(context)
-                              .tabBarTheme
-                              .unselectedLabelColor)))
-            ],
-          ),
-          GestureDetector(
-            onTap: () {
-              // uploadUserAvatar(userUID, isolate);
-            },
-            child: Container(
-              margin: EdgeInsets.all(20),
-              width: 120.0,
-              height: 120.0,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  alignment: Alignment.topCenter,
-                  image: AssetImage(
-                      'assets/uuu.jpg'),
-                  // image: FirebaseImage(profilePhotoUrl, shouldCache: false),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 8, 0, 18),
-            child: new Text(
-              map['name'] != null ? map['name'] : "не указано",
-              style: Theme.of(context).textTheme.headline5,
-            ),
-          ),
-          Row(
-            //строка с Фи
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(profileName),
-              Text(profileSurName),
-            ],
-          ),
-          Row(
-            //строка с датой рождения
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                child: new Text(
-                  profileBornDate,
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-              ),
-            ],
-          ),
-          //город
-          Container(
-            child: new Text(
-              profileCountry,
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-          ),
-          Container(
-            child: new Text(
-              profileTarget,
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-          ),
-          Expanded(child: Container()),
-          new Container(
-            height: 50,
-            margin: EdgeInsets.only(left: 15,right: 15,bottom: 15),
-            // padding: EdgeInsets.all(24),
-            child:
-                myGradientButton(context, btnText: "Редактировать", funk: () {
-              Navigator.pushNamed(context, "/editprofile");
-            }),
-          )
+          bannerFace(context),
+
         ]);
+  }
+
+  Widget bannerFace(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          margin: EdgeInsets.only(top: 10),
+          height: MediaQuery.of(context).size.height * 0.17,
+          width: MediaQuery.of(context).size.width * 1,
+          child: Image.asset(
+            "assets/FonForFaceProfile.png",
+            fit: BoxFit.fill,
+          ),
+        ),
+        Positioned(
+          top: 40,
+          left: 10,
+          child: Container(
+            alignment: Alignment.bottomLeft,
+            padding: EdgeInsets.fromLTRB(10, 26, 10, 10),
+            height: MediaQuery.of(context).size.height * 0.13,
+            width: MediaQuery.of(context).size.width * 0.26,
+            decoration: BoxDecoration(
+                color: Color(0xFFF5FCFD),
+                boxShadow: [
+                  BoxShadow()
+                ],
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(100),
+                    topLeft: Radius.circular(100))),
+            child: Center(
+              child: CircleAvatar(
+                radius: 55,
+                backgroundImage: AssetImage('assets/grandMother.png'),
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 20,
+          left: 150,
+          child: Row(
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 40),
+                  height: 52,
+                  width: 52,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                borderRadius: BorderRadius.circular(100),
+              ),
+                  child: Icon(Icons.add,size: 50,color: Color(0xFF94D065),)),
+              Container(
+                alignment: Alignment.bottomLeft,
+                padding: EdgeInsets.fromLTRB(10, 26, 10, 10),
+                height: MediaQuery.of(context).size.height * 0.13,
+                width: MediaQuery.of(context).size.width * 0.26,
+                // decoration: BoxDecoration(
+                //     color: Color(0xFFF5FCFD),
+                //     borderRadius: BorderRadius.only(
+                //         topRight: Radius.circular(100),
+                //         topLeft: Radius.circular(100))),
+                child: Center(
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 55,
+                    backgroundImage: AssetImage('assets/grandMother.png'),
+                  ),
+                ),
+              ),
+              Container(
+                alignment: Alignment.bottomLeft,
+                padding: EdgeInsets.fromLTRB(10, 26, 10, 10),
+                height: MediaQuery.of(context).size.height * 0.13,
+                width: MediaQuery.of(context).size.width * 0.26,
+                // decoration: BoxDecoration(
+                //     color: Color(0xFFF5FCFD),
+                //     borderRadius: BorderRadius.only(
+                //         topRight: Radius.circular(100),
+                //         topLeft: Radius.circular(100))),
+                child: Center(
+                  child: CircleAvatar(
+                    radius: 55,
+                    backgroundImage: AssetImage('assets/grandMother.png'),
+                  ),
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    );
   }
 
   Widget myGradientButton(BuildContext context,

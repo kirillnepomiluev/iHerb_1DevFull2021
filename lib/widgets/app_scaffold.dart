@@ -12,9 +12,10 @@ class AppScaffold extends StatelessWidget {
   final String title;
   final Widget child;
   final index;
+  final bool actionsBasket;
 
   AppScaffold(
-      {@required this.title, @required this.child, @required this.index});
+      {@required this.title, @required this.child, @required this.index, this.actionsBasket = false});
 
   List<IconData> iconList = [
     MyFlutterApp.ic_profile,
@@ -27,7 +28,17 @@ class AppScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(title,
+            style: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontStyle: FontStyle.normal,
+            fontFamily: 'Roboto',
+            fontSize: 30,
+            color: Colors.black)),
+        actions: [
+          actionsBasket ? IconButton(icon: Icon(Icons.shopping_basket_outlined,size: 28,color: Colors.black,), onPressed: (){}) : Container(),
+        ],
+        backgroundColor: Color(0xFFF5FCFD),
       ),
       body: child,
       backgroundColor: Color(0xFFF5FCFD),
