@@ -19,3 +19,17 @@ Widget loadindWidget() {
        ),
       );
     }
+
+Widget standartPadding(Widget widget) {
+  return Padding(
+    padding: EdgeInsets.all(5.0),
+    child: widget,
+  );
+}
+
+Widget topBottomPadding(Widget widget) {
+  return Padding(
+    padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+    child: widget,
+  );
+}

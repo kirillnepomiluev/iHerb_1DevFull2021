@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:iherb_helper/models/analyze.dart';
+import 'package:iherb_helper/models/analyzeResult.dart';
 import 'package:iherb_helper/models/symptom.dart';
+import 'package:iherb_helper/screens/AnalyzeScreen.dart';
 import 'package:iherb_helper/widgets/app_scaffold.dart';
 import 'package:iherb_helper/utils/utils.dart' as utils;
 
@@ -56,9 +58,18 @@ class _SuggestionPickerState extends State<SuggestionPicker> {
     // new Text("Рекомендуемые анализы", style: new TextStyle(fontSize: 18.0),)
     symptom.analyzesList.forEach((element) {
       columnContent.add(
-        new ListTile(
-          title: Text(
-            element.name, style: new TextStyle(fontSize: 18.0),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => AnalyzeScreen(element),
+              ),
+            );
+          },
+          child: new ListTile(
+            title: Text(
+              element.name, style: new TextStyle(fontSize: 18.0),
+            ),
           ),
         ),
       );

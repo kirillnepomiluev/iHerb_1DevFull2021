@@ -2,19 +2,20 @@
 class AnalyzeIndicator {
 
   String name;
-  int minMan;
-  int minWoman;
-  int maxMan;
-  int maxWoman;
+  String analyzeId;
+  num minMan;
+  num minWoman;
+  num maxMan;
+  num maxWoman;
 
   AnalyzeIndicator.fromMap(Map<String, dynamic> snapshot)
       :
         name = snapshot['name'] ?? '',
+        analyzeId = snapshot['analyzeId'] ?? '',
         minMan = snapshot['minMan'] ?? '',
         maxMan = snapshot['maxMan'] ?? '',
         minWoman = snapshot['minWoman'] ?? '',
         maxWoman = snapshot['maxWoman'] ?? '';
-
 
   @override
   bool operator ==(Object other) =>
@@ -22,6 +23,7 @@ class AnalyzeIndicator {
       other is AnalyzeIndicator &&
           runtimeType == other.runtimeType &&
           name == other.name &&
+          analyzeId == other.analyzeId &&
           minMan == other.minMan &&
           minWoman == other.minWoman &&
           maxMan == other.maxMan &&
@@ -30,6 +32,7 @@ class AnalyzeIndicator {
   @override
   int get hashCode =>
       name.hashCode ^
+      analyzeId.hashCode ^
       minMan.hashCode ^
       minWoman.hashCode ^
       maxMan.hashCode ^
@@ -37,6 +40,6 @@ class AnalyzeIndicator {
 
   @override
   String toString() {
-    return 'AnalyzeIndicator{name: $name, minMan: $minMan, minWoman: $minWoman, maxMan: $maxMan, maxnWoman: $maxWoman}';
+    return 'AnalyzeIndicator{name: $name, analyzeId: $analyzeId, minMan: $minMan, minWoman: $minWoman, maxMan: $maxMan, maxWoman: $maxWoman}';
   }
 }
