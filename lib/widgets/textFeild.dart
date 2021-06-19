@@ -40,31 +40,19 @@ class _TextFieldNeoState extends State<TextFieldNeo> {
           ),
         ),
         Neumorphic(
-          margin: EdgeInsets.only(left: 24, right: 24, top: 12, bottom: 12),
+          margin: EdgeInsets.only(left: 24, right: 24, top: 0, bottom: 0),
           style: NeumorphicStyle(
             color: Color(0xFFF5FCFD),
             depth: NeumorphicTheme.embossDepth(context),
             boxShape: NeumorphicBoxShape.stadium(),
           ),
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 18),
-          child: Row(
-            children: [
-              Container(
-                height:15,
-                width: 15,
-                child: Icon(
-                  this.widget.icon,
-                  color: Color(0xFF999999),
-                ),
-              ),
-              TextField(
-                onChanged: this.widget.onChanged,
-                controller: _controller,
-                decoration:
-                    InputDecoration.collapsed(hintText: this.widget.hint),
-              ),
-            ],
-          ),
+          child:               TextField(
+            onChanged: this.widget.onChanged,
+            controller: _controller,
+            decoration:
+            InputDecoration.collapsed(hintText: this.widget.hint),
+          )
         )
       ],
     );

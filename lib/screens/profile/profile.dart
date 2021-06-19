@@ -72,7 +72,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           bannerFace(context),
-          TextFieldNeo(hint: 'Город',icon: Icons.location_on_outlined,onChanged: (value){},label: '',)
+          TextFieldNeo(hint: 'Город',icon: Icons.location_on_outlined,onChanged: (value){},label: '',),
+          TextFieldNeo(hint: 'Фамилия',icon: Icons.location_on_outlined,onChanged: (value){},label: '',),
+          TextFieldNeo(hint: 'Имя',icon: Icons.location_on_outlined,onChanged: (value){},label: '',),
+          TextFieldNeo(hint: 'Отчество',icon: Icons.location_on_outlined,onChanged: (value){},label: '',),
+          TextFieldNeo(hint: 'Дата рождения',icon: Icons.location_on_outlined,onChanged: (value){},label: '',),
+          TextFieldNeo(hint: 'Город',icon: Icons.location_on_outlined,onChanged: (value){},label: '',),
         ]);
   }
 

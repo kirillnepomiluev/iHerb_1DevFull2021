@@ -19,10 +19,10 @@ class AppScaffold extends StatelessWidget {
       {@required this.title, @required this.child, @required this.index, this.actionsBasket = false});
 
   List<IconData> iconList = [
-    MyFlutterApp.ic_profile,
-    MyFlutterApp.ic_food,
+    MyFlutterApp.ic_home,
     MyFlutterApp.ic_analyz,
-    MyFlutterApp.ic_home
+    MyFlutterApp.ic_food,
+    MyFlutterApp.ic_profile,
   ];
 
   @override
@@ -60,6 +60,7 @@ class AppScaffold extends StatelessWidget {
 
         backgroundColor: Colors.white,
         icons: iconList,
+        inactiveColor: Color(0xFF999999),
         activeIndex: index,
         gapLocation: GapLocation.center,
         elevation: 16,
