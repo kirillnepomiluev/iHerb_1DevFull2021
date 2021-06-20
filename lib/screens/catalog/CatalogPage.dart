@@ -49,37 +49,63 @@ class _CatalogScreenState extends State<CatalogScreen> {
     String profileCountry = " Город не указан",
     String profileTarget = " Цель не указана",
   }) {
-    return SingleChildScrollView(
-      child: Column(
-          // mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            TextFieldNeo(
-              label: "поиск",
-              hint: "поиск",
-              onChanged: (value) {},
-            ),
-            bannerPosition(context),
-            bannerPosition(context, color: salat_Light),
-            bannerPosition(context, color: rozov_Light),
-            bannerPosition(context),
-            bannerPosition(context),
-            bannerPosition(context),
-          ]),
-    );
+    return Column(
+        // mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          TextFieldNeo(
+            label: "поиск",
+            hint: "поиск",
+            onChanged: (value) {},
+          ),
+          StreamBuilder(
+              stream: FirebaseFirestore.instance.collection("supplements")
+                  // .orderBy('time', descending: true)
+                  .snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                QuerySnapshot querySnapshot = snapshot.data;
+                int itemCount = querySnapshot.docs.length;
+                if (snapshot.hasData) {
+                  return Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: itemCount,itemBuilder: (BuildContext context, int index){
+                      return bannerPosition(context,name: querySnapshot.docs[index]['name'],color: salat_Light,image: querySnapshot.docs[index]['image']);
+                    },),
+                  );
+                } else if (snapshot.hasError) {
+                  return Container(
+                    height: 100,
+                    width: 100,
+                    child: Text(
+                      "Ошибка",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  );
+                }
+                return Container(
+                  child: CircularProgressIndicator(),
+                );
+              }),
+        ]);
   }
 
   /// Виджет с товаром
   Widget bannerPosition(BuildContext context,
       {Color color = orange_Light,
+        // List<String> vitamins,
       String section = 'Витамины, Микроэлементы',
+      bool checkbox = false,
       String name = 'California Gold Nutrition Immune 4, ',
+      String image = 'assets/position.png',
+      String price = '₽792.51',
       String description =
           'средство для укрепления иммунитета, 180 вегетарианских капсул'}) {
     return GestureDetector(
       onTap: (){
-        showDialog(context: context, builder: (BuildContext context) => showPosition(context));
+        showDialog(context: context, builder: (BuildContext context) => showPosition(context,name,image,checkbox));
       },
       child: Stack(
         children: [
@@ -101,22 +127,22 @@ class _CatalogScreenState extends State<CatalogScreen> {
             child: Row(
               children: [
                 Container(
-                  height: 138,
+                  height: 80,
                   width: 60,
                   margin: EdgeInsets.only(left: 0, right: 15),
-                  child: Image.asset('assets/position.png'),
+                  child: Card(elevation: 9,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)) ,child: Image(image: NetworkImage(image),)),
                 ),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(section,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.normal,
-                              fontFamily: 'Roboto',
-                              fontSize: 12,
-                              color: Color(0xFF478414))),
+                      // Text(section,
+                      //     style: TextStyle(
+                      //         fontWeight: FontWeight.w600,
+                      //         fontStyle: FontStyle.normal,
+                      //         fontFamily: 'Roboto',
+                      //         fontSize: 12,
+                      //         color: Color(0xFF478414))),
                       Container(
                         margin: EdgeInsets.only(top: 7, bottom: 7),
                         child: Text(name,
@@ -133,7 +159,30 @@ class _CatalogScreenState extends State<CatalogScreen> {
                               fontStyle: FontStyle.normal,
                               fontFamily: 'Roboto',
                               fontSize: 14,
-                              color: Color(0xFF2E2E2E)))
+                              color: Color(0xFF2E2E2E))),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(child: Text(price,                          style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                                fontFamily: 'Roboto',
+                                fontSize: 16,
+                                color: Color(0xFFBE4543)))),
+                            Row(
+                              children: [
+                                Icon(Icons.star,color: Color(0xFFFDC600),size: 15,),
+                                Container(margin: EdgeInsets.only(left: 7,right: 7),child: Icon(Icons.star,color: Color(0xFFFDC600),size: 15,)),
+                                Icon(Icons.star,color: Color(0xFFFDC600),size: 15,),
+                                Container(margin: EdgeInsets.only(left: 7,right: 7),child: Icon(Icons.star,color: Color(0xFFFDC600),size: 15,)),
+                                Icon(Icons.star,color: Color(0xFFFDC600),size: 15,),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 )
@@ -209,7 +258,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
 
 
   /// виджет карточки товара
-  Widget showPosition(BuildContext context) {
+  Widget showPosition(BuildContext context,String name,String image,bool checkbox) {
     return Dialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(topLeft: Radius.circular(32),topRight: Radius.circular(32))),
@@ -225,7 +274,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(child: Container(margin: EdgeInsets.only(left: 24),child: Text('California Gold Nutrition Superfoods, органический порошок спирулины, 240 г (8,5 унции)',style: TextStyle(
+                    Expanded(child: Container(margin: EdgeInsets.only(left: 24),child: Text(name,style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontStyle: FontStyle.normal,
                         fontFamily: 'Roboto',
@@ -248,18 +297,18 @@ class _CatalogScreenState extends State<CatalogScreen> {
                     Container(
                       height: 96,
                       width: 74,
-                      child: Image.asset('assets/oneEticetca.png'),
+                      child: Image(image: NetworkImage(image),),
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 15,right: 15),
                       height: 133,
                       width: 100,
-                      child: Image.asset('assets/twoEticetca.png'),
+                      child: Image(image: NetworkImage(image),),
                     ),
                     Container(
                       height: 96,
                       width: 74,
-                      child: Image.asset('assets/threeEticetca.png'),
+                      child: Image(image: NetworkImage(image),),
                     )
                   ],
                 ),
@@ -407,6 +456,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
               Center(
                 child: GestureDetector(
                   onTap: (){
+                    addBasket(image,name,checkbox);
                     showDialog(context: context, builder: (BuildContext context) => show1BAsket(context));
                   },
                   child: Container(
@@ -432,6 +482,22 @@ class _CatalogScreenState extends State<CatalogScreen> {
     ),
         ],
       ),);
+  }
+
+  //метод занесения позиции
+  Future<void> addBasket(String image,
+  String name,
+      bool checkbox,
+  ) {
+    // Call the user's CollectionReference to add a new user
+    return FirebaseFirestore.instance.collection('basket')
+        .add({
+      'image': image, // John Doe
+      'name': name, // Stokes and Sons
+      'checkbox':checkbox
+    })
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
   }
 
   /// виджет корзины
