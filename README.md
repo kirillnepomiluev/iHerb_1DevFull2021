@@ -1,16 +1,27 @@
-# iherb_helper
+# iHerb – прототип команды 1DevFull участника финала Цифрового прорыва 2020. Android + iOS + Web.
 
-A new Flutter application.
+## Решение от команды 1DevFull
+---
 
-## Getting Started
+Это FrontEnd, а тут [ссылка на BackEnd](https://github.com/kirillnepomiluev/iherb-1DevFullBackend)
 
-This project is a starting point for a Flutter application.
+Проект выполнен на языке Dart с использованием Flutter, поэтому сборка для Android, iOS и Web
+осуществляется из одного и того же кода.
 
-A few resources to get you started if this is your first Flutter project:
+Используется Dart 2.7.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Android
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Сборку для Android можно выполнить в любой операционной системе: Linux, macOS, Windows.
+Для запуска можно использовать эмулятор, который поставляется с Android Studio,
+или подключить телефон или планшет к компьютеру.
+
+Андроид APK [доступен здесь](https://drive.google.com/file/d/1CdCbCS_vh7fg7IglV-QAhc5LOZNJpqiw/view?usp=sharing)
+
+## iOS
+
+Сборку для iOS нужно делать на macOS. Для запуска можно использовать эмулятор или iPhone / iPad.
+
+## Web
+
+Сборку для Web можно делать в любой операционной системе. Для отладки используется браузер Google Chrome.
