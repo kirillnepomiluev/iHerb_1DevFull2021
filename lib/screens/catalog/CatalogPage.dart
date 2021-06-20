@@ -1,17 +1,10 @@
-import 'dart:isolate';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:iherb_helper/themes/colors.dart';
 import 'package:iherb_helper/widgets/app_scaffold.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:iherb_helper/widgets/textFeild.dart';
-
-import '../dialog.dart';
-import '../settingsPage.dart';
-
 
 /// экран каталога
 class CatalogScreen extends StatefulWidget {
@@ -20,8 +13,7 @@ class CatalogScreen extends StatefulWidget {
 }
 
 class _CatalogScreenState extends State<CatalogScreen> {
-
-  bool ischeck  = false;
+  bool isCheck  = false;
 
   @override
   void initState() {
@@ -34,7 +26,6 @@ class _CatalogScreenState extends State<CatalogScreen> {
       child: profileContentColumn(context),
       title: "Пищевые добавки",
       index: 2,
-      // actionsBasket: true,
     );
   }
 
@@ -50,7 +41,6 @@ class _CatalogScreenState extends State<CatalogScreen> {
     String profileTarget = " Цель не указана",
   }) {
     return Column(
-        // mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
@@ -1027,7 +1017,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
       child: ListTile(
         onTap: (){
           setState(() {
-            ischeck = !ischeck;
+            isCheck = !isCheck;
           });
         },
         trailing: Neumorphic(
@@ -1035,7 +1025,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
               borderRadius: BorderRadius.circular(100),
               color: Colors.white
           ),
-            child: ischeck ? Center(
+            child: isCheck ? Center(
               child: Container(height: 15, width: 15, decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
                   color: Color(0xFF478414)
@@ -1072,7 +1062,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
       child: ListTile(
         onTap: (){
           setState(() {
-            ischeck = !ischeck;
+            isCheck = !isCheck;
           });
         },
         trailing: Neumorphic(
@@ -1080,7 +1070,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
               borderRadius: BorderRadius.circular(100),
               color: Colors.white
           ),
-            child: ischeck ? Center(
+            child: isCheck ? Center(
               child: Container(height: 15, width: 15, decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
                   color: Color(0xFF478414)
@@ -1109,7 +1099,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
       child: ListTile(
         onTap: (){
           setState(() {
-            ischeck = !ischeck;
+            isCheck = !isCheck;
           });
         },
         trailing: Neumorphic(
@@ -1117,7 +1107,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
               borderRadius: BorderRadius.circular(100),
               color: Colors.white
           ),
-            child: ischeck ? Center(
+            child: isCheck ? Center(
               child: Container(height: 15, width: 15, decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
                   color: Color(0xFF478414)

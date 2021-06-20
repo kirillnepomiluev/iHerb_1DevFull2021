@@ -1,10 +1,8 @@
-
 import 'analyze.dart';
 import 'analyzeIndicator.dart';
 
 /// Результат анализа
 class AnalyzeResult {
-
   Analyze analyze;
   List<AnalyzeIndicator> analyzeIndicators;
 

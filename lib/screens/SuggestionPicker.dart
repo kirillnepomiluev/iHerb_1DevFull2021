@@ -1,19 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:iherb_helper/models/analyze.dart';
-import 'package:iherb_helper/models/analyzeResult.dart';
 import 'package:iherb_helper/models/symptom.dart';
 import 'package:iherb_helper/screens/AnalyzeScreen.dart';
 import 'package:iherb_helper/widgets/app_scaffold.dart';
 import 'package:iherb_helper/utils/utils.dart' as utils;
 
 class SuggestionPicker extends StatefulWidget {
-@override
-_SuggestionPickerState createState() => _SuggestionPickerState();
+  @override
+  _SuggestionPickerState createState() => _SuggestionPickerState();
 }
 
 class _SuggestionPickerState extends State<SuggestionPicker> {
-
   bool _load = false;
   FirebaseFirestore store = FirebaseFirestore.instance;
   List<Symptom> _symptoms = [];
@@ -28,7 +26,7 @@ class _SuggestionPickerState extends State<SuggestionPicker> {
   Widget build(BuildContext context) {
     return AppScaffold(
       title: "Выберите симптом",
-      child: _load ? utils.loadindWidget() : Container(
+      child: _load ? utils.loadingWidget() : Container(
         child: new ListView.builder(
           itemCount: _symptoms.length,
           itemBuilder: (context, i) {
@@ -39,18 +37,18 @@ class _SuggestionPickerState extends State<SuggestionPicker> {
                   new Text(
                     _symptoms[i].name,
                     style: new TextStyle(
-                        color: Color(0xFF478414),
-                        fontSize: 20.0,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.bold,
+                      color: Color(0xFF478414),
+                      fontSize: 20.0,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   new Text(
                     "Нажмите, чтобы посмотреть рекомендуемые анализы",
                     style: new TextStyle(
-                        fontSize: 10.0,
-                        fontFamily: 'Roboto',
-                        color: Color(0xFF2E2E2E)
+                      fontSize: 10.0,
+                      fontFamily: 'Roboto',
+                      color: Color(0xFF2E2E2E),
                     ),
                   )
                 ],
@@ -68,9 +66,9 @@ class _SuggestionPickerState extends State<SuggestionPicker> {
     );
   }
 
-  _buildExpandableContent(Symptom symptom) {
+  List<Widget> _buildExpandableContent(Symptom symptom) {
     List<Widget> columnContent = [];
-    // new Text("Рекомендуемые анализы", style: new TextStyle(fontSize: 18.0),)
+
     symptom.analyzesList.forEach((element) {
       columnContent.add(
         InkWell(
@@ -85,9 +83,9 @@ class _SuggestionPickerState extends State<SuggestionPicker> {
             title: Text(
               element.name,
               style: new TextStyle(
-                  fontSize: 18.0,
-                  fontFamily: 'Roboto',
-                  color: Color(0xFF478414),
+                fontSize: 18.0,
+                fontFamily: 'Roboto',
+                color: Color(0xFF478414),
               ),
             ),
           ),
@@ -99,7 +97,6 @@ class _SuggestionPickerState extends State<SuggestionPicker> {
   }
 
   void getSymptoms() async {
-
     setState(() {
       _load = true;
     });
@@ -118,7 +115,6 @@ class _SuggestionPickerState extends State<SuggestionPicker> {
         .forEach((element) => analyzes.add(Analyze.fromMap(element.id, element.data()))));
 
     symptoms.forEach((element) {
-      List<Analyze> analyzeForSymptom = [];
       element.analyzes.forEach((analyzesId) {
         Analyze a = analyzes.firstWhere((element) => element.id == analyzesId);
         element.analyzesList.add(a);
@@ -131,8 +127,5 @@ class _SuggestionPickerState extends State<SuggestionPicker> {
       _symptoms = symptoms;
       _load = false;
     });
-
   }
 }
-
-

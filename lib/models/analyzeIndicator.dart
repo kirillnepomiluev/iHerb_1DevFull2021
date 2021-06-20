@@ -1,7 +1,5 @@
-
 /// Индикатор анализа с референсными значениями
 class AnalyzeIndicator {
-
   String name;
   String analyzeId;
   num minMan;
@@ -13,10 +11,10 @@ class AnalyzeIndicator {
       :
         name = snapshot['name'] ?? '',
         analyzeId = snapshot['analyzeId'] ?? '',
-        minMan = snapshot['minMan'] ?? '',
-        maxMan = snapshot['maxMan'] ?? '',
-        minWoman = snapshot['minWoman'] ?? '',
-        maxWoman = snapshot['maxWoman'] ?? '';
+        minMan = snapshot['minMan'] ?? 0,
+        maxMan = snapshot['maxMan'] ?? 0,
+        minWoman = snapshot['minWoman'] ?? 0,
+        maxWoman = snapshot['maxWoman'] ?? 0;
 
   @override
   bool operator ==(Object other) =>

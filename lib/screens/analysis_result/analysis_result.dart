@@ -29,8 +29,11 @@ class AnalysisResultScreen extends StatelessWidget {
     );
   }
 
+  /// Возвращает наиболее заниженный показатель.
   String _getLack() {
     if (recognized.isEmpty) return null;
+
+    // TODO: сравнивать с нормами.
     return recognized.keys.last;
   }
 

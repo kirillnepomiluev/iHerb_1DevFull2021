@@ -1,5 +1,4 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iherb_helper/screens/BasketPage.dart';
 import 'package:iherb_helper/screens/SuggestionPicker.dart';
@@ -7,7 +6,6 @@ import 'package:iherb_helper/screens/catalog/CatalogPage.dart';
 import 'package:iherb_helper/screens/lifestyle/LifeStylePage.dart';
 import 'package:iherb_helper/screens/profile/profile.dart';
 import 'package:iherb_helper/screens/search/search.dart';
-import 'package:iherb_helper/themes/colors.dart';
 
 import '../icons.dart';
 
@@ -33,12 +31,14 @@ class AppScaffold extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title,
-            style: TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.w700,
             fontStyle: FontStyle.normal,
             fontFamily: 'Roboto',
             fontSize: 18,
-            color: Colors.black)),
+            color: Colors.black,
+          ),
+        ),
         actions: [
           actionsBasket ? IconButton(icon: Icon(Icons.shopping_basket_outlined,size: 28,color: Colors.black,), onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => BasketPage(),));}) : Container(),
         ],
@@ -73,7 +73,6 @@ class AppScaffold extends StatelessWidget {
         rightCornerRadius: 15,
         height: MediaQuery.of(context).size.height * 0.13,
         onTap: (index) => _onTabTap(context, index),
-        //other params
       ),
     );
   }

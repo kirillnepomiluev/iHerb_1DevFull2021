@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-/// структура данный, используемая в распознавании текста
+/// Виджет таблицы с результатами распознания.
 class MapTable extends StatelessWidget {
   final Map<String, dynamic> map;
 

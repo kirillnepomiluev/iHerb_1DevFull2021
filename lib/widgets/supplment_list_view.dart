@@ -12,11 +12,6 @@ class SupplementsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
- /*     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 5.0,
-        crossAxisSpacing: 5.0,
-      ), */
       itemCount: supplements.length,
       itemBuilder: (context, i) {
         return Row(

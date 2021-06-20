@@ -7,7 +7,7 @@ import 'package:iherb_helper/widgets/text_field_decoration.dart';
 import 'abstract.dart';
 import 'decoration.dart';
 
-/// служебный виджет для автозаполнения
+/// Виджет выпадающего списка произвольных объектов
 class ModelAutocompleteWidget<T extends WithIdTitle<String>> extends StatefulWidget {
   final TextValueEditorController<T> controller;
   final int minLength;
@@ -83,7 +83,7 @@ class _ModelAutocompleteWidgetState<T extends WithIdTitle<String>> extends State
     }
 
     return ListTile(
-      title: Text('(Not Found)'),
+      title: Text('(Не найдено)'),
     );
   }
 }

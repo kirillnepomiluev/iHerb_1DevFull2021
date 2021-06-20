@@ -8,6 +8,7 @@ import 'detectorPainters.dart';
 import 'scannerUtils.dart';
 
 /// Сканнер результатов анализов с помощью камеры
+/// Пример для проверки: https://helix.ru/catalog/downloadexamplefile/?hxid=06-228
 class CameraPreviewScanner extends StatefulWidget {
   final Map<String, double> recognized;
 
@@ -25,9 +26,9 @@ class CameraPreviewScanner extends StatefulWidget {
 }
 
 class _CameraPreviewScannerState extends State<CameraPreviewScanner> {
+  // TODO: Брать список на распознание из БД.
   final _terms = ['B1', 'B2', 'B3', 'B5', 'B6'];
   final _regExpsLeft = <String, RegExp>{};
-  //final _recognized = <String, double>{};
   final _numberRegExp = RegExp('\\s(\\d+(\\.\\d+)?)\\s');
 
   _CameraPreviewScannerState(this._camera);
@@ -74,47 +75,36 @@ class _CameraPreviewScannerState extends State<CameraPreviewScanner> {
     });
   }
 
+  /// Вызывается на каждом кадре, получает распознанный текст.
   void _onResult(VisionText visionText) {
-//print('RECOGNIZED: ' + visionText.text);
     final toTest = ' ' + visionText.text + ' ';
 
+    // Перебираем все поля, для которых ещё не нашли значения.
     for (final entry in _regExpsLeft.entries) {
       final term = entry.key;
       if (widget.recognized.containsKey(term)) continue;
       final regExp = entry.value;
 
-      if (toTest.contains(term)) {
-        final a = 1;
-      }
-
       final match = regExp.firstMatch(toTest);
       if (match == null) continue;
 
+      // Распознали название показателя.
+      // Ищем любое число, которое следует за названием.
+
       final end = match.end;
       final tail = toTest.substring(end);
-//print('TAIL: ' + tail);
       final valueMatch = _numberRegExp.firstMatch(tail);
       if (valueMatch == null) continue;
 
       final stringValue = valueMatch.group(1);
-//print('FOUND ' + term + ' ' + tail.substring(valueMatch.start, valueMatch.end));
-print('FOUND ' + term + ' ' + stringValue);
 
       final value = double.tryParse(stringValue);
       if (value == null) continue;
 
+      // Да, это число. Сохраняем.
+      // TODO: Сравнить с нормой. При существенном отклоннени продолжать сканировать. Вероятна ошибка.
       widget.recognized[term] = value;
     }
-    // for (final textBlock in visionText.blocks) {
-    //   final toTest = ' ' + textBlock.text + ' ';
-    //
-    //   for (final regExp in _regExpsLeft) {
-    //     final match = regExp.firstMatch(toTest);
-    //     if (match == null) continue;
-    //
-    //     if (match.)
-    //   }
-    // }
   }
 
   Future<dynamic> Function(FirebaseVisionImage image)  _getDetectionMethod() {
@@ -169,7 +159,6 @@ print('FOUND ' + term + ' ' + stringValue);
           CameraPreview(_camera),
           _buildResults(),
           Positioned(
-            //child: MapTable(map: _recognized),
             child: _getRecognizedContainer(),
             left: 30,
             bottom: 30,
@@ -210,14 +199,9 @@ print('FOUND ' + term + ' ' + stringValue);
 
   @override
   void dispose() {
-//    _recognizer.close();
+    // TODO: Проверить порядок освобождния ресурсов.
     // _camera.dispose().then((_) {
-    //   _barcodeDetector.close();
-    //   _faceDetector.close();
-    //   _imageLabeler.close();
-    //   _cloudImageLabeler.close();
     //   _recognizer.close();
-    //   _cloudRecognizer.close();
     // });
 
     super.dispose();

@@ -34,7 +34,7 @@ class SuggestedItemsScreen extends StatelessWidget {
   Widget _buildWithSnapshot(QuerySnapshot snapshot) {
     final supplements = <Supplement>[];
 
-    for (final doc in snapshot.docs) {
+    for (final doc in snapshot?.docs ?? []) {
       supplements.add(
         Supplement.fromMap(doc.data()),
       );

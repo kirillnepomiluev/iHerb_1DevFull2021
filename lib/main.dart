@@ -36,7 +36,7 @@ TextEditingController taskPageTextController = TextEditingController(text: "ok")
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   await Firebase.initializeApp();
+  await Firebase.initializeApp();
   await SharedPreferences.getInstance().then((value) {
     prefs = value;
     if (prefs != null && prefs.get("isDarkTeme") != null) {
@@ -59,18 +59,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'iHerb',
       theme: CustomTheme.of(context),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }

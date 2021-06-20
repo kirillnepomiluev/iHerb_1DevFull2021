@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// функция, используемая в полнотекстовом поиске
@@ -7,7 +6,7 @@ List<String> textToSearchTerms(String text) {
 }
 
 /// виджет загрузки
-Widget loadindWidget() {
+Widget loadingWidget() {
   return Center(
     child: new Container(
       width: 70.0,
@@ -16,14 +15,14 @@ Widget loadindWidget() {
         padding: const EdgeInsets.all(5.0),
         child: new Center(
           child: new CircularProgressIndicator()
-            )
-          ),
-       ),
-      );
-    }
+        )
+      ),
+    ),
+  );
+}
 
 /// стандартный виджет отступа
-Widget standartPadding(Widget widget) {
+Widget standardPadding(Widget widget) {
   return Padding(
     padding: EdgeInsets.all(5.0),
     child: widget,

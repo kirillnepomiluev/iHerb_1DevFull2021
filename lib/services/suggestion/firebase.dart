@@ -8,7 +8,7 @@ import 'abstract.dart';
 
 typedef FutureOr<Iterable<T>> SuggestionsCallback<T>(String pattern);
 
-/// интерфейс полнотекстового поиска
+/// Абстрактный сервис выпадающих предложений при поиске, использующий коллекцию Firebase для данных.
 abstract class FirestoreSuggestionService<T extends WithIdTitle<String>> extends AbstractSuggestionService<T> {
   Future<List<T>> suggest(String str) {
     return (str == '')
@@ -27,7 +27,6 @@ abstract class FirestoreSuggestionService<T extends WithIdTitle<String>> extends
   Future<List<T>> _suggestMatches(String str) async {
     final terms = textToSearchTerms(str);
 
-    //final querySnapshot = await FirebaseFirestore.instance.collection('conditions').where('keywords', arrayContains: terms[0]).get();
     final querySnapshot = await orderMatches(getAllQuery().where('keywords', arrayContains: terms[0]))
         .limit(10)
         .get();

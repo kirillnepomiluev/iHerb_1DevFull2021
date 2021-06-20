@@ -1,13 +1,8 @@
-import 'dart:isolate';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:iherb_helper/widgets/app_scaffold.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:iherb_helper/widgets/textFeild.dart';
-
-import '../settingsPage.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -16,12 +11,6 @@ class ProfileScreen extends StatefulWidget {
 
 /// экран с профилем
 class _ProfileScreenState extends State<ProfileScreen> {
-  Isolate isolate;
-
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
-  String photoURL;
-
   DocumentSnapshot dsuser;
 
   Map map;
@@ -32,7 +21,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool isCheckedWoman = false;
 
   void getCurrentUser() async {
-    // FirebaseUser _user = await _firebaseAuth.currentUser();
     FirebaseFirestore.instance
         .collection("users")
         .doc("NjJrmXCopAGttbkKame2")
@@ -62,63 +50,65 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget profileContentColumn(
-    BuildContext context, {
-    String profilePhotoUrl,
-    String userUID,
-    String profileName = " ",
-    String profileSurName = " ",
-    String profileBornDate = " дата не указана",
-    String profileCountry = " Город не указан",
-    String profileTarget = " Цель не указана",
-  }) {
+    BuildContext context,
+    {
+      String profilePhotoUrl,
+      String userUID,
+      String profileName = " ",
+      String profileSurName = " ",
+      String profileBornDate = " дата не указана",
+      String profileCountry = " Город не указан",
+      String profileTarget = " Цель не указана",
+    }
+  ) {
     return SingleChildScrollView(
       child: Column(
-          // mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            bannerFace(context),
-            TextFieldNeo(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          bannerFace(context),
+          TextFieldNeo(
+            hint: 'Город',
+            icon: Icons.location_on_outlined,
+            onChanged: (value) {},
+            label: '',
+          ),
+          TextFieldNeo(
+            hint: 'Фамилия',
+            icon: Icons.location_on_outlined,
+            onChanged: (value) {},
+            label: '',
+          ),
+          TextFieldNeo(
+            hint: 'Имя',
+            icon: Icons.location_on_outlined,
+            onChanged: (value) {},
+            label: '',
+          ),
+          TextFieldNeo(
+            hint: 'Отчество',
+            icon: Icons.location_on_outlined,
+            onChanged: (value) {},
+            label: '',
+          ),
+          genderCheck(context),
+          TextFieldNeo(
+            hint: 'Дата рождения',
+            icon: Icons.location_on_outlined,
+            onChanged: (value) {},
+            label: '',
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 15),
+            child: TextFieldNeo(
               hint: 'Город',
               icon: Icons.location_on_outlined,
               onChanged: (value) {},
               label: '',
             ),
-            TextFieldNeo(
-              hint: 'Фамилия',
-              icon: Icons.location_on_outlined,
-              onChanged: (value) {},
-              label: '',
-            ),
-            TextFieldNeo(
-              hint: 'Имя',
-              icon: Icons.location_on_outlined,
-              onChanged: (value) {},
-              label: '',
-            ),
-            TextFieldNeo(
-              hint: 'Отчество',
-              icon: Icons.location_on_outlined,
-              onChanged: (value) {},
-              label: '',
-            ),
-            genderCheck(context),
-            TextFieldNeo(
-              hint: 'Дата рождения',
-              icon: Icons.location_on_outlined,
-              onChanged: (value) {},
-              label: '',
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 15),
-              child: TextFieldNeo(
-                hint: 'Город',
-                icon: Icons.location_on_outlined,
-                onChanged: (value) {},
-                label: '',
-              ),
-            ),
-          ]),
+          ),
+        ],
+      ),
     );
   }
 
@@ -143,16 +133,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
             height: MediaQuery.of(context).size.height * 0.13,
             width: MediaQuery.of(context).size.width * 0.26,
             decoration: BoxDecoration(
-                color: Color(0xFFF5FCFD),
-                boxShadow: [BoxShadow(
+              color: Color(0xFFF5FCFD),
+              boxShadow: [
+                BoxShadow(
                   color: Colors.grey.withOpacity(0.3),
                   blurRadius: 2,
                   spreadRadius: 3,
-                  offset: Offset(-2,-2),
-                )],
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(100),
-                    topLeft: Radius.circular(100))),
+                  offset: Offset(-2, -2),
+                ),
+              ],
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(100),
+                topLeft: Radius.circular(100),
+              ),
+            ),
             child: Center(
               child: CircleAvatar(
                 radius: 55,
@@ -167,28 +161,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Row(
             children: [
               Container(
-                  margin: EdgeInsets.only(top: 40),
-                  height: 52,
-                  width: 52,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: Icon(
-                    Icons.add,
-                    size: 50,
-                    color: Color(0xFF94D065),
-                  )),
+                margin: EdgeInsets.only(top: 40),
+                height: 52,
+                width: 52,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                child: Icon(
+                  Icons.add,
+                  size: 50,
+                  color: Color(0xFF94D065),
+                ),
+              ),
               Container(
                 alignment: Alignment.bottomLeft,
                 padding: EdgeInsets.fromLTRB(10, 26, 10, 10),
                 height: MediaQuery.of(context).size.height * 0.13,
                 width: MediaQuery.of(context).size.width * 0.26,
-                // decoration: BoxDecoration(
-                //     color: Color(0xFFF5FCFD),
-                //     borderRadius: BorderRadius.only(
-                //         topRight: Radius.circular(100),
-                //         topLeft: Radius.circular(100))),
                 child: Center(
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
@@ -202,21 +192,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: EdgeInsets.fromLTRB(10, 26, 10, 10),
                 height: MediaQuery.of(context).size.height * 0.13,
                 width: MediaQuery.of(context).size.width * 0.26,
-                // decoration: BoxDecoration(
-                //     color: Color(0xFFF5FCFD),
-                //     borderRadius: BorderRadius.only(
-                //         topRight: Radius.circular(100),
-                //         topLeft: Radius.circular(100))),
                 child: Center(
                   child: CircleAvatar(
                     radius: 55,
                     backgroundImage: AssetImage('assets/grandMother.png'),
                   ),
                 ),
-              )
+              ),
             ],
           ),
-        )
+        ),
       ],
     );
   }
@@ -232,7 +217,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             margin: EdgeInsets.only(right: 8),
             child: Center(child: Text('Мужской')),
             style: NeumorphicStyle(
-                color: isCheckedMen ? Color(0xFF478414) : Colors.white),
+              color: isCheckedMen ? Color(0xFF478414) : Colors.white,
+            ),
             padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
             onPressed: () {
               setState(() {
@@ -244,7 +230,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           NeumorphicButton(
             child: Center(child: Text('Женский')),
             style: NeumorphicStyle(
-                color: isCheckedWoman ? Color(0xFF478414) : Colors.white),
+              color: isCheckedWoman ? Color(0xFF478414) : Colors.white,
+            ),
             padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
             onPressed: () {
               setState(() {
@@ -258,26 +245,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget myGradientButton(BuildContext context,
-      {String btnText = " ", void Function() funk}) {
+  Widget myGradientButton(
+    BuildContext context,
+    {
+      String text = " ",
+      void Function() onPressed,
+    }
+  ) {
     return RaisedButton(
-      onPressed: funk,
+      onPressed: onPressed,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
       padding: const EdgeInsets.all(0.0),
       child: Ink(
         decoration: const BoxDecoration(
           color: Colors.blue,
-          //     colors: <Color>[btngradientstartlight, btngradientendlight]),
-          // gradient: LinearGradient(
           borderRadius: BorderRadius.all(Radius.circular(80.0)),
         ),
         child: Container(
           padding: EdgeInsets.all(14),
-//        constraints: const BoxConstraints(minWidth: 88.0, minHeight: 36.0, maxWidth: 123),
-          // min sizes for Material buttons
           alignment: Alignment.center,
           child: Text(
-            btnText,
+            text,
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white, fontSize: 16),
           ),

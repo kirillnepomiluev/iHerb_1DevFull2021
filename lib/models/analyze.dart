@@ -1,7 +1,5 @@
-
 /// Модель данных медицинского анализа
 class Analyze {
-
   String id;
   String name;
   String description;

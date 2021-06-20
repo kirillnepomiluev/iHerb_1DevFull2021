@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:iherb_helper/models/abstract.dart';
 
+/// Абстрактный редактор.
 abstract class AbstractValueEditorController<T> {
   final _changesController = StreamController<void>.broadcast();
   Stream<void> get changes => _changesController.stream;
@@ -29,6 +30,7 @@ abstract class AbstractValueEditorController<T> {
   }
 }
 
+/// Абстрактный редактор с текстовым полем.
 abstract class TextValueEditorController<T> extends AbstractValueEditorController<T> {
   final textEditingController = TextEditingController();
 
@@ -37,6 +39,7 @@ abstract class TextValueEditorController<T> extends AbstractValueEditorControlle
   }
 }
 
+/// Редактор с текстовым полем, который хранит объект из БД.
 class WithIdTitleEditorController<I, T extends WithIdTitle<I>> extends TextValueEditorController<T> {
   T _value;
 

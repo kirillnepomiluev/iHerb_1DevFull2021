@@ -1,8 +1,5 @@
-
-
 /// Модель данных для БАД
 class Supplement {
-
   String name;
   String image;
   String analyze;

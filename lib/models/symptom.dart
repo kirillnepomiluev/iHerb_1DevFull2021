@@ -1,9 +1,7 @@
-
 import 'package:iherb_helper/models/analyze.dart';
 
 /// Модель данных для симптома
 class Symptom {
-
   String name;
   List<String> analyzes;
   List<Analyze> analyzesList = [];
